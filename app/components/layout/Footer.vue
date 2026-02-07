@@ -5,7 +5,7 @@
         <!-- Brand -->
         <div>
           <div class="flex items-center gap-2 mb-4">
-            <Icon name="heroicons:cube" class="w-8 h-8 text-red-500" />
+            <img src="/images/logo.png" alt="Cambodia RC" class="h-12 w-12 object-contain" />
             <span class="text-xl font-bold text-slate-100">Cambodia RC</span>
           </div>
           <p class="text-slate-400 text-sm mb-4 font-khmer">

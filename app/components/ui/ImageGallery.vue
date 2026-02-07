@@ -3,9 +3,9 @@
     <!-- Main Image -->
     <div class="gallery-main">
       <!-- Placeholder for mock data -->
-      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
         <div class="text-center">
-          <Icon name="heroicons:photo" class="w-24 h-24 text-slate-600 mb-4" />
+          <Icon name="heroicons:photo" class="w-24 h-24 text-slate-400 mb-4" />
           <p class="text-slate-500 text-sm">{{ alt }}</p>
         </div>
       </div>
@@ -19,8 +19,8 @@
         :class="['gallery-thumb', { active: activeIndex === index }]"
         @click="activeIndex = index"
       >
-        <div class="w-full h-full flex items-center justify-center bg-slate-800">
-          <Icon name="heroicons:photo" class="w-6 h-6 text-slate-600" />
+        <div class="w-full h-full flex items-center justify-center bg-slate-100">
+          <Icon name="heroicons:photo" class="w-6 h-6 text-slate-400" />
         </div>
       </button>
     </div>

@@ -1,24 +1,26 @@
-/* Cambodia RC - DJI Premium Dark Theme */
+/* Cambodia RC - Light Theme with Red Accents */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* CSS Custom Properties */
 :root {
-  --color-base: theme('colors.slate.950');
-  --color-surface: theme('colors.slate.900');
-  --color-surface-hover: theme('colors.slate.800');
-  --color-border: theme('colors.slate.700');
-  --color-accent: theme('colors.red.500');
-  --color-accent-hover: theme('colors.red.400');
-  --color-accent-secondary: theme('colors.orange.500');
-  --glass-bg: rgba(15, 23, 42, 0.8);
-  --glass-border: rgba(148, 163, 184, 0.1);
+  --color-base: #ffffff;
+  --color-surface: #f8fafc;
+  --color-surface-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-accent: #dc2626;
+  --color-accent-hover: #b91c1c;
+  --color-accent-light: #fef2f2;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(226, 232, 240, 0.8);
 }
 
 /* Base Styles */
 body {
-  @apply bg-slate-950 text-slate-50 antialiased;
+  @apply bg-white text-slate-800 antialiased;
   font-family: 'Inter', 'Kantumruy Pro', system-ui, sans-serif;
 }
 
@@ -28,21 +30,21 @@ body {
 
 /* Glassmorphism Card */
 .glass-card {
-  @apply bg-slate-900/80 backdrop-blur-md border border-slate-700/50 rounded-2xl;
+  @apply bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm;
 }
 
 /* Product Card */
 .product-card {
-  @apply glass-card overflow-hidden transition-all duration-300;
+  @apply bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm;
 }
 
 .product-card:hover {
-  @apply border-slate-600/70 transform -translate-y-1;
-  box-shadow: 0 0 30px rgba(239, 68, 68, 0.1), 0 20px 40px rgba(0, 0, 0, 0.3);
+  @apply border-red-200 transform -translate-y-1;
+  box-shadow: 0 10px 40px rgba(220, 38, 38, 0.1), 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .product-card-image {
-  @apply relative aspect-square overflow-hidden bg-slate-800;
+  @apply relative aspect-square overflow-hidden bg-slate-100;
 }
 
 .product-card-image img {
@@ -57,68 +59,65 @@ body {
 .btn-accent {
   @apply inline-flex items-center justify-center gap-2 px-6 py-3
          bg-gradient-to-r from-red-600 to-red-500
-         hover:from-red-500 hover:to-orange-500
+         hover:from-red-700 hover:to-red-600
          text-white font-semibold rounded-xl
          transition-all duration-300
-         shadow-lg shadow-red-500/20 hover:shadow-red-500/40;
+         shadow-lg shadow-red-500/25 hover:shadow-red-500/40;
 }
 
 .btn-ghost {
   @apply inline-flex items-center justify-center gap-2 px-6 py-3
-         bg-slate-800/50 hover:bg-slate-700/70
-         border border-slate-600 hover:border-slate-500
-         text-slate-200 font-medium rounded-xl
+         bg-slate-100 hover:bg-slate-200
+         border border-slate-200 hover:border-slate-300
+         text-slate-700 font-medium rounded-xl
          transition-all duration-300;
 }
 
 /* Search Input */
 .search-input {
-  @apply w-full bg-slate-800/50 border border-slate-700
+  @apply w-full bg-white border border-slate-200
          rounded-xl px-4 py-3 pl-11
-         text-slate-100 placeholder-slate-400
-         focus:outline-none focus:border-red-500/50 focus:ring-2 focus:ring-red-500/20
-         transition-all duration-200;
+         text-slate-800 placeholder-slate-400
+         focus:outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100
+         transition-all duration-200 shadow-sm;
 }
 
 /* Category Pills */
 .category-pill {
   @apply inline-flex items-center gap-2 px-4 py-2
-         bg-slate-800/50 border border-slate-700
-         text-slate-300 rounded-full text-sm font-medium
-         transition-all duration-200 cursor-pointer;
+         bg-white border border-slate-200
+         text-slate-600 rounded-full text-sm font-medium
+         transition-all duration-200 cursor-pointer shadow-sm;
 }
 
 .category-pill:hover {
-  @apply border-slate-600 text-slate-100;
+  @apply border-slate-300 text-slate-800 bg-slate-50;
 }
 
 .category-pill.active {
-  @apply bg-gradient-to-r from-red-600/20 to-orange-600/20
-         border-red-500/50 text-red-400;
+  @apply bg-red-50 border-red-300 text-red-600;
 }
 
 /* Price Tag */
 .price-tag {
-  @apply text-2xl font-bold bg-gradient-to-r from-red-400 to-orange-400
-         bg-clip-text text-transparent;
+  @apply text-2xl font-bold text-red-600;
 }
 
 .price-tag-lg {
-  @apply text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-400 to-orange-400
-         bg-clip-text text-transparent;
+  @apply text-3xl md:text-4xl font-bold text-red-600;
 }
 
 /* Text Gradient */
 .text-gradient {
-  @apply bg-gradient-to-r from-red-400 via-orange-400 to-red-400
+  @apply bg-gradient-to-r from-red-600 via-red-500 to-red-600
          bg-clip-text text-transparent;
 }
 
-/* Navbar Glass */
+/* Navbar */
 .navbar-glass {
   @apply fixed top-0 left-0 right-0 z-50
-         bg-slate-950/80 backdrop-blur-xl
-         border-b border-slate-800/50;
+         bg-white/95 backdrop-blur-xl
+         border-b border-slate-200 shadow-sm;
 }
 
 /* CTA Buttons - Khmer Style */
@@ -136,53 +135,53 @@ body {
 }
 
 .badge-in-stock {
-  @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30;
+  @apply bg-emerald-50 text-emerald-600 border border-emerald-200;
 }
 
 .badge-low-stock {
-  @apply bg-amber-500/20 text-amber-400 border border-amber-500/30;
+  @apply bg-amber-50 text-amber-600 border border-amber-200;
 }
 
 .badge-out-of-stock {
-  @apply bg-red-500/20 text-red-400 border border-red-500/30;
+  @apply bg-red-50 text-red-600 border border-red-200;
 }
 
 .badge-pre-order {
-  @apply bg-blue-500/20 text-blue-400 border border-blue-500/30;
+  @apply bg-blue-50 text-blue-600 border border-blue-200;
 }
 
 .badge-category {
-  @apply bg-slate-700/50 text-slate-300 border border-slate-600/50;
+  @apply bg-slate-100 text-slate-600 border border-slate-200;
 }
 
 /* Skeleton Loading */
 .skeleton {
-  @apply bg-slate-800 animate-pulse rounded-lg;
+  @apply bg-slate-200 animate-pulse rounded-lg;
 }
 
 .skeleton-card {
-  @apply glass-card overflow-hidden;
+  @apply bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm;
 }
 
 .skeleton-image {
-  @apply aspect-square bg-slate-800 animate-pulse;
+  @apply aspect-square bg-slate-200 animate-pulse;
 }
 
 .skeleton-text {
-  @apply h-4 bg-slate-800 animate-pulse rounded;
+  @apply h-4 bg-slate-200 animate-pulse rounded;
 }
 
 .skeleton-text-lg {
-  @apply h-6 bg-slate-800 animate-pulse rounded;
+  @apply h-6 bg-slate-200 animate-pulse rounded;
 }
 
 /* Hero Section */
 .hero-gradient {
   background: linear-gradient(
     135deg,
-    rgba(15, 23, 42, 0.95) 0%,
-    rgba(15, 23, 42, 0.8) 50%,
-    rgba(15, 23, 42, 0.6) 100%
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.7) 100%
   );
 }
 
@@ -192,39 +191,39 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-900;
+  @apply bg-slate-100;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-700 rounded-full;
+  @apply bg-slate-300 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-600;
+  @apply bg-slate-400;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-red-500/30 text-white;
+  @apply bg-red-100 text-red-800;
 }
 
 /* Focus Visible */
 :focus-visible {
-  @apply outline-none ring-2 ring-red-500/50 ring-offset-2 ring-offset-slate-950;
+  @apply outline-none ring-2 ring-red-400 ring-offset-2 ring-offset-white;
 }
 
 /* Image Gallery */
 .gallery-main {
-  @apply aspect-square bg-slate-800 rounded-2xl overflow-hidden;
+  @apply aspect-square bg-slate-100 rounded-2xl overflow-hidden;
 }
 
 .gallery-thumb {
-  @apply aspect-square bg-slate-800 rounded-lg overflow-hidden cursor-pointer
+  @apply aspect-square bg-slate-100 rounded-lg overflow-hidden cursor-pointer
          border-2 border-transparent transition-all duration-200;
 }
 
 .gallery-thumb:hover {
-  @apply border-slate-600;
+  @apply border-slate-300;
 }
 
 .gallery-thumb.active {
@@ -233,23 +232,23 @@ body {
 
 /* Spec List */
 .spec-group {
-  @apply glass-card p-4;
+  @apply bg-slate-50 border border-slate-200 rounded-xl p-4;
 }
 
 .spec-group-title {
-  @apply flex items-center gap-2 text-sm font-semibold text-slate-300 mb-3;
+  @apply flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3;
 }
 
 .spec-item {
-  @apply flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0;
+  @apply flex justify-between items-center py-2 border-b border-slate-100 last:border-0;
 }
 
 .spec-label {
-  @apply text-sm text-slate-400;
+  @apply text-sm text-slate-500;
 }
 
 .spec-value {
-  @apply text-sm text-slate-100 font-medium;
+  @apply text-sm text-slate-800 font-medium;
 }
 
 /* Responsive Grid */

@@ -2,9 +2,9 @@
   <div class="relative">
     <select
       :value="modelValue"
-      class="appearance-none bg-slate-800/50 border border-slate-700 rounded-xl px-4 py-2.5 pr-10
-             text-slate-200 text-sm cursor-pointer
-             focus:outline-none focus:border-red-500/50 focus:ring-2 focus:ring-red-500/20
+      class="appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2.5 pr-10
+             text-slate-700 text-sm cursor-pointer shadow-sm
+             focus:outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100
              transition-all duration-200"
       @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value as SortOption)"
     >

@@ -1,5 +1,5 @@
 <template>
-  <section class="relative h-[70vh] min-h-[500px] overflow-hidden">
+  <section class="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-slate-50 via-white to-red-50">
     <!-- Slides -->
     <div class="absolute inset-0">
       <TransitionGroup name="fade">
@@ -22,10 +22,14 @@
             />
           </div>
           <!-- Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-950/50" />
+          <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/60" />
         </div>
       </TransitionGroup>
     </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl" />
+    <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
 
     <!-- Content -->
     <div class="container-app relative z-10 h-full flex items-center">
@@ -35,10 +39,10 @@
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               <span class="text-gradient">{{ activeSlide.title }}</span>
             </h1>
-            <p class="text-xl md:text-2xl text-slate-100 mb-4">
+            <p class="text-xl md:text-2xl text-slate-700 mb-4">
               {{ activeSlide.subtitle }}
             </p>
-            <p class="text-lg text-slate-300 mb-8 font-khmer">
+            <p class="text-lg text-slate-500 mb-8">
               {{ activeSlide.description }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
@@ -65,7 +69,7 @@
           'h-2 rounded-full transition-all duration-300',
           currentSlide === index
             ? 'bg-red-500 w-8'
-            : 'bg-slate-500/50 hover:bg-slate-400/50 w-2'
+            : 'bg-slate-300 hover:bg-slate-400 w-2'
         ]"
         @click="goToSlide(index)"
       />
@@ -73,13 +77,13 @@
 
     <!-- Navigation Arrows -->
     <button
-      class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-slate-900/50 text-slate-300 hover:bg-slate-800/70 hover:text-white transition-all"
+      class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 border border-slate-200 text-slate-600 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all shadow-sm"
       @click="prevSlide"
     >
       <Icon name="heroicons:chevron-left" class="w-6 h-6" />
     </button>
     <button
-      class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-slate-900/50 text-slate-300 hover:bg-slate-800/70 hover:text-white transition-all"
+      class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 border border-slate-200 text-slate-600 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all shadow-sm"
       @click="nextSlide"
     >
       <Icon name="heroicons:chevron-right" class="w-6 h-6" />
@@ -103,22 +107,22 @@ const slides: HeroSlide[] = [
     id: 1,
     title: 'DJI Mavic 3 Pro',
     subtitle: 'Flagship Triple-Camera Drone',
-    description: 'ដំណើរហោះហើរដែលមិនធ្លាប់មានពីមុនមក ជាមួយកាមេរ៉ា Hasselblad និង 43 នាទីនៃពេលវេលាហោះហើរ។',
-    gradient: 'bg-gradient-to-br from-slate-900 via-red-950 to-slate-900'
+    description: 'Experience unprecedented flight with Hasselblad camera and 43 minutes of flight time.',
+    gradient: 'bg-gradient-to-br from-slate-50 via-red-50 to-white'
   },
   {
     id: 2,
     title: 'DJI Osmo Pocket 3',
     subtitle: 'Pocket-Sized Gimbal Camera',
-    description: 'ថតវីដេអូ 4K រលូនដោយដៃតែមួយ។ ល្អឥតខ្ចោះសម្រាប់ Vloggers និងអ្នកបង្កើតមាតិកា។',
-    gradient: 'bg-gradient-to-br from-slate-900 via-orange-950 to-slate-900'
+    description: 'Capture smooth 4K video with one hand. Perfect for Vloggers and content creators.',
+    gradient: 'bg-gradient-to-br from-white via-orange-50 to-slate-50'
   },
   {
     id: 3,
     title: 'DJI RS 4 Pro',
     subtitle: 'Professional Gimbal Stabilizer',
-    description: 'ស្ថេរភាពកម្រិតវិជ្ជាជីវៈសម្រាប់កាមេរ៉ាភាពយន្ត។ ផ្ទុកបាន 4.5kg ជាមួយនឹងថាមពលថ្ម 12 ម៉ោង។',
-    gradient: 'bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900'
+    description: 'Professional-grade stabilization for cinema cameras. 4.5kg payload with 12-hour battery.',
+    gradient: 'bg-gradient-to-br from-slate-50 via-blue-50 to-white'
   }
 ]
 

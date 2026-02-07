@@ -3,7 +3,7 @@
     <!-- Back Navigation -->
     <NuxtLink
       to="/categories"
-      class="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 mb-6 transition-colors"
+      class="inline-flex items-center gap-2 text-slate-500 hover:text-red-600 mb-6 transition-colors"
     >
       <Icon name="heroicons:arrow-left" class="w-5 h-5" />
       <span>All Categories</span>
@@ -28,9 +28,9 @@
 
     <!-- Not Found State -->
     <div v-else-if="!category" class="text-center py-16">
-      <Icon name="heroicons:folder-open" class="w-16 h-16 text-slate-600 mx-auto mb-4" />
-      <h2 class="text-2xl font-bold text-slate-100 mb-2">Category Not Found</h2>
-      <p class="text-slate-400 mb-6">The category you're looking for doesn't exist.</p>
+      <Icon name="heroicons:folder-open" class="w-16 h-16 text-slate-400 mx-auto mb-4" />
+      <h2 class="text-2xl font-bold text-slate-800 mb-2">Category Not Found</h2>
+      <p class="text-slate-500 mb-6">The category you're looking for doesn't exist.</p>
       <NuxtLink to="/categories" class="btn-accent">
         View All Categories
       </NuxtLink>
@@ -40,17 +40,17 @@
     <div v-else>
       <!-- Category Header -->
       <div class="flex items-start gap-4 mb-8">
-        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-red-600/20 to-orange-600/20 flex items-center justify-center flex-shrink-0">
-          <Icon :name="category.icon || 'heroicons:cube'" class="w-8 h-8 text-red-400" />
+        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center flex-shrink-0">
+          <Icon :name="category.icon || 'heroicons:cube'" class="w-8 h-8 text-red-500" />
         </div>
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-slate-100 mb-2">
+          <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
             {{ category.name }}
           </h1>
-          <p class="text-slate-400">
+          <p class="text-slate-500">
             {{ category.description }}
           </p>
-          <p class="text-sm text-slate-500 mt-2">
+          <p class="text-sm text-slate-400 mt-2">
             {{ category.product_count }} products
           </p>
         </div>
@@ -79,9 +79,9 @@
 
       <!-- Empty State -->
       <div v-else-if="filteredProducts.length === 0" class="text-center py-16">
-        <Icon name="heroicons:shopping-bag" class="w-16 h-16 text-slate-600 mx-auto mb-4" />
-        <h3 class="text-xl font-semibold text-slate-100 mb-2">No products found</h3>
-        <p class="text-slate-400 mb-4">
+        <Icon name="heroicons:shopping-bag" class="w-16 h-16 text-slate-400 mx-auto mb-4" />
+        <h3 class="text-xl font-semibold text-slate-800 mb-2">No products found</h3>
+        <p class="text-slate-500 mb-4">
           {{ searchQuery ? 'Try adjusting your search' : 'No products in this category yet' }}
         </p>
         <button v-if="searchQuery" class="btn-ghost" @click="searchQuery = ''">

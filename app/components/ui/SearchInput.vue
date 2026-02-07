@@ -14,7 +14,7 @@
     <button
       v-if="modelValue"
       type="button"
-      class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-200 transition-colors"
+      class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 transition-colors"
       @click="$emit('update:modelValue', '')"
     >
       <Icon name="heroicons:x-mark" class="w-5 h-5" />

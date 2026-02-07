@@ -8,10 +8,10 @@
       <!-- Section Header -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h2 class="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-2">
             {{ $t('products.title') }}
           </h2>
-          <p class="text-slate-400">
+          <p class="text-slate-500">
             {{ $t('products.subtitle') }}
           </p>
         </div>
@@ -41,7 +41,7 @@
       <!-- Clear Filters -->
       <div v-if="hasActiveFilters" class="mb-6">
         <button
-          class="text-sm text-red-400 hover:text-red-300 flex items-center gap-1"
+          class="text-sm text-red-600 hover:text-red-700 flex items-center gap-1"
           @click="clearFilters"
         >
           <Icon name="heroicons:x-mark" class="w-4 h-4" />
@@ -62,9 +62,9 @@
 
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-16">
-        <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-400 mx-auto mb-4" />
-        <h3 class="text-xl font-semibold text-slate-100 mb-2">{{ $t('products.failedToLoad') }}</h3>
-        <p class="text-slate-400 mb-4">{{ error.message }}</p>
+        <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-500 mx-auto mb-4" />
+        <h3 class="text-xl font-semibold text-slate-800 mb-2">{{ $t('products.failedToLoad') }}</h3>
+        <p class="text-slate-500 mb-4">{{ error.message }}</p>
         <button class="btn-accent" @click="refresh()">
           {{ $t('common.tryAgain') }}
         </button>
@@ -72,9 +72,9 @@
 
       <!-- Empty State -->
       <div v-else-if="filteredProducts.length === 0" class="text-center py-16">
-        <Icon name="heroicons:magnifying-glass" class="w-16 h-16 text-slate-600 mx-auto mb-4" />
-        <h3 class="text-xl font-semibold text-slate-100 mb-2">{{ $t('products.notFound') }}</h3>
-        <p class="text-slate-400 mb-4">
+        <Icon name="heroicons:magnifying-glass" class="w-16 h-16 text-slate-400 mx-auto mb-4" />
+        <h3 class="text-xl font-semibold text-slate-800 mb-2">{{ $t('products.notFound') }}</h3>
+        <p class="text-slate-500 mb-4">
           {{ $t('products.notFoundDesc') }}
         </p>
         <button class="btn-ghost" @click="clearFilters">

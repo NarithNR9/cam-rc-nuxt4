@@ -1,11 +1,11 @@
 <template>
   <div class="relative">
     <button
-      class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-slate-600 transition-colors text-sm"
+      class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-slate-200 hover:border-red-200 transition-colors text-sm shadow-sm"
       @click="isOpen = !isOpen"
     >
-      <Icon name="heroicons:language" class="w-4 h-4 text-slate-400" />
-      <span class="text-slate-200">{{ currentLocaleName }}</span>
+      <Icon name="heroicons:language" class="w-4 h-4 text-slate-500" />
+      <span class="text-slate-700">{{ currentLocaleName }}</span>
       <Icon
         name="heroicons:chevron-down"
         class="w-4 h-4 text-slate-400 transition-transform"
@@ -17,13 +17,13 @@
     <Transition name="fade">
       <div
         v-if="isOpen"
-        class="absolute right-0 mt-2 py-1 w-32 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50"
+        class="absolute right-0 mt-2 py-1 w-32 bg-white border border-slate-200 rounded-lg shadow-xl z-50"
       >
         <button
           v-for="locale in availableLocales"
           :key="locale.code"
-          class="w-full px-4 py-2 text-left text-sm hover:bg-slate-700 transition-colors flex items-center gap-2"
-          :class="locale.code === currentLocale ? 'text-red-400' : 'text-slate-300'"
+          class="w-full px-4 py-2 text-left text-sm hover:bg-slate-50 transition-colors flex items-center gap-2"
+          :class="locale.code === currentLocale ? 'text-red-600' : 'text-slate-600'"
           @click="switchLocale(locale.code)"
         >
           <span v-if="locale.code === currentLocale">

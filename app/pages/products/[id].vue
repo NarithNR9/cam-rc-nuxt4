@@ -3,7 +3,7 @@
     <!-- Back Navigation -->
     <NuxtLink
       to="/#products"
-      class="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 mb-8 transition-colors"
+      class="inline-flex items-center gap-2 text-slate-500 hover:text-red-600 mb-8 transition-colors"
     >
       <Icon name="heroicons:arrow-left" class="w-5 h-5" />
       <span>Back to Products</span>
@@ -23,9 +23,9 @@
 
     <!-- Not Found State -->
     <div v-else-if="!product" class="text-center py-16">
-      <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-400 mx-auto mb-4" />
-      <h2 class="text-2xl font-bold text-slate-100 mb-2">Product Not Found</h2>
-      <p class="text-slate-400 mb-6">The product you're looking for doesn't exist or has been removed.</p>
+      <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-500 mx-auto mb-4" />
+      <h2 class="text-2xl font-bold text-slate-800 mb-2">Product Not Found</h2>
+      <p class="text-slate-500 mb-6">The product you're looking for doesn't exist or has been removed.</p>
       <NuxtLink to="/" class="btn-accent">
         Browse All Products
       </NuxtLink>
@@ -49,7 +49,7 @@
         </div>
 
         <!-- Name -->
-        <h1 class="text-3xl md:text-4xl font-bold text-slate-100">
+        <h1 class="text-3xl md:text-4xl font-bold text-slate-800">
           {{ product.name }}
         </h1>
 
@@ -59,8 +59,8 @@
         </p>
 
         <!-- Description -->
-        <div class="prose prose-invert prose-slate max-w-none">
-          <p class="text-slate-300 leading-relaxed">
+        <div class="prose prose-slate max-w-none">
+          <p class="text-slate-600 leading-relaxed">
             {{ product.description }}
           </p>
         </div>
@@ -72,8 +72,8 @@
         />
 
         <!-- Specifications -->
-        <div v-if="Object.keys(groupedSpecs).length > 0" class="pt-6 border-t border-slate-800">
-          <h3 class="text-lg font-semibold text-slate-100 mb-4">Specifications</h3>
+        <div v-if="Object.keys(groupedSpecs).length > 0" class="pt-6 border-t border-slate-200">
+          <h3 class="text-lg font-semibold text-slate-800 mb-4">Specifications</h3>
           <UiSpecsList
             :grouped-specs="groupedSpecs"
             :get-icon="getSpecGroupIcon"

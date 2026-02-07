@@ -3,9 +3,9 @@
     <!-- Image -->
     <div class="product-card-image">
       <!-- Use placeholder for mock data -->
-      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
         <div class="text-center">
-          <Icon :name="categoryIcon" class="w-16 h-16 text-slate-600 mb-2" />
+          <Icon :name="categoryIcon" class="w-16 h-16 text-slate-400 mb-2" />
           <span class="text-xs text-slate-500">{{ categoryName }}</span>
         </div>
       </div>
@@ -25,7 +25,7 @@
 
     <!-- Info -->
     <div class="p-4">
-      <h3 class="font-semibold text-slate-100 line-clamp-2 mb-2 min-h-[3rem]">
+      <h3 class="font-semibold text-slate-800 line-clamp-2 mb-2 min-h-[3rem]">
         {{ product.name }}
       </h3>
       <p class="price-tag">

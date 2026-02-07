@@ -1,0 +1,76 @@
+{
+  "common": {
+    "home": "ទំព័រដើម",
+    "products": "ផលិតផល",
+    "categories": "ប្រភេទ",
+    "search": "ស្វែងរក",
+    "all": "ទាំងអស់",
+    "viewDetails": "មើលលម្អិត",
+    "browseProducts": "រុករកផលិតផល",
+    "contactUs": "ទាក់ទងយើង",
+    "orderNow": "បញ្ជាទិញឥឡូវ",
+    "tryAgain": "ព្យាយាមម្តងទៀត",
+    "clearFilters": "សម្អាតតម្រង",
+    "backTo": "ត្រឡប់ទៅ",
+    "loading": "កំពុងផ្ទុក..."
+  },
+  "nav": {
+    "orderViaTelegram": "បញ្ជាទិញឥឡូវ"
+  },
+  "hero": {
+    "title1": "ផលិតផល DJI",
+    "title2": "នៅកម្ពុជា",
+    "description": "ផលិតផល DJI ជាផ្លូវការនៅកម្ពុជា។ Drones, Gimbals, និង Cameras សម្រាប់អ្នកជំនាញ។"
+  },
+  "products": {
+    "title": "ផលិតផលរបស់យើង",
+    "subtitle": "រុករកបណ្តុំ DJI drones, gimbals, និង cameras របស់យើង",
+    "searchPlaceholder": "ស្វែងរកផលិតផល...",
+    "notFound": "រកមិនឃើញផលិតផល",
+    "notFoundDesc": "សូមព្យាយាមកែប្រែលក្ខខណ្ឌស្វែងរក ឬតម្រង",
+    "failedToLoad": "បរាជ័យក្នុងការផ្ទុកផលិតផល",
+    "productNotFound": "រកមិនឃើញផលិតផល",
+    "productNotFoundDesc": "ផលិតផលដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានដកចេញ។",
+    "browseAll": "រុករកផលិតផលទាំងអស់",
+    "specifications": "ព័ត៌មានលម្អិត"
+  },
+  "categories": {
+    "title": "ប្រភេទផលិតផល",
+    "subtitle": "រុករកផលិតផលរបស់យើងតាមប្រភេទ",
+    "browse": "រុករក",
+    "productsCount": "{count} ផលិតផល",
+    "notFound": "រកមិនឃើញប្រភេទ",
+    "notFoundDesc": "ប្រភេទដែលអ្នកកំពុងស្វែងរកមិនមាន។",
+    "viewAll": "មើលប្រភេទទាំងអស់",
+    "allCategories": "ប្រភេទទាំងអស់"
+  },
+  "category": {
+    "drones": "ដ្រូន",
+    "gimbals": "ជីមបល",
+    "cameras": "កាមេរ៉ា",
+    "accessories": "គ្រឿងបន្ថែម"
+  },
+  "sort": {
+    "newest": "ថ្មីបំផុត",
+    "priceLow": "តម្លៃ: ទាបទៅខ្ពស់",
+    "priceHigh": "តម្លៃ: ខ្ពស់ទៅទាប",
+    "nameAZ": "ឈ្មោះ: ក ទៅ អ"
+  },
+  "stock": {
+    "inStock": "មានក្នុងស្តុក",
+    "lowStock": "ស្តុកតិច",
+    "outOfStock": "អស់ស្តុក",
+    "preOrder": "កម្មង់មុន"
+  },
+  "cta": {
+    "orderViaTelegram": "ធ្វើការបញ្ជាទិញតាម Telegram",
+    "phoneSupport": "ទូរស័ព្ទ Support"
+  },
+  "footer": {
+    "description": "អ្នកលក់ផ្លូវការផលិតផល DJI នៅកម្ពុជា។ Drones, Gimbals, និង Cameras គុណភាពខ្ពស់។",
+    "quickLinks": "តំណរហ័ស",
+    "contact": "ទំនាក់ទំនង",
+    "location": "#35, ផ្លូវ 105, សង្កាត់បឹងព្រលិត, ខណ្ឌ៧មករា, រាជធានីភ្នំពេញ, កម្ពុជា",
+    "copyright": "© {year} Cambodia RC។ រក្សាសិទ្ធិគ្រប់យ៉ាង។"
+  }
+}

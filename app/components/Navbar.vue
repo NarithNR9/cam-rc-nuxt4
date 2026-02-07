@@ -22,6 +22,12 @@
           >
             Products
           </NuxtLink>
+          <NuxtLink
+            to="/categories"
+            class="text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
+          >
+            Categories
+          </NuxtLink>
           <a
             :href="telegramUrl"
             target="_blank"
@@ -65,6 +71,13 @@
               @click="mobileMenuOpen = false"
             >
               Products
+            </NuxtLink>
+            <NuxtLink
+              to="/categories"
+              class="text-slate-300 hover:text-slate-100 transition-colors py-2"
+              @click="mobileMenuOpen = false"
+            >
+              Categories
             </NuxtLink>
             <a
               :href="telegramUrl"

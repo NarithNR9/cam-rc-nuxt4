@@ -18,15 +18,15 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductCategory } from '~/types'
+import type { ProductCategoryName } from '~/types'
 
 defineProps<{
-  modelValue: ProductCategory | 'all'
+  modelValue: ProductCategoryName | 'all'
   counts: Record<string, number>
 }>()
 
 defineEmits<{
-  'update:modelValue': [value: ProductCategory | 'all']
+  'update:modelValue': [value: ProductCategoryName | 'all']
 }>()
 
 const categories = [

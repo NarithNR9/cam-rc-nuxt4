@@ -1,4 +1,4 @@
-import type { Product, ProductCategory, ProductFilters } from '~/types'
+import type { Product, ProductCategoryName, ProductFilters } from '~/types'
 import { mockProducts } from '~/data/mockProducts'
 import { getFileId } from '~/composables/useDirectus'
 
@@ -92,7 +92,7 @@ export function useProducts() {
     if (!products.value) return {}
 
     const counts: Record<string, number> = { all: products.value.length }
-    const categories: ProductCategory[] = ['Drones', 'Gimbals', 'Cameras', 'Accessories']
+    const categories: ProductCategoryName[] = ['Drones', 'Gimbals', 'Cameras', 'Accessories']
 
     for (const category of categories) {
       counts[category] = products.value.filter((p) => p.category === category).length

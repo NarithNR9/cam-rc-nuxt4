@@ -54,6 +54,11 @@
               </NuxtLink>
             </li>
             <li>
+              <NuxtLink to="/categories" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
+                Categories
+              </NuxtLink>
+            </li>
+            <li>
               <a href="https://www.dji.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
                 DJI Official
               </a>

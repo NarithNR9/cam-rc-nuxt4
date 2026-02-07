@@ -1,6 +1,15 @@
-// Product Types for Directus 'products' collection
+// Category Types for Directus 'categories' collection
+export interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string
+  icon?: string
+  image?: string | DirectusFile | null
+}
 
-export type ProductCategory = 'Drones' | 'Gimbals' | 'Cameras' | 'Accessories'
+// Product Types for Directus 'products' collection
+export type ProductCategoryName = 'Drones' | 'Gimbals' | 'Cameras' | 'Accessories'
 
 export type StockStatus = 'in_stock' | 'low_stock' | 'out_of_stock' | 'pre_order'
 
@@ -24,7 +33,8 @@ export interface Product {
   id: string | number
   name: string
   price: number
-  category: ProductCategory
+  category: ProductCategoryName | string | Category
+  category_id?: string
   description: string
   specs: ProductSpec[]
   image: string | DirectusFile | null
@@ -37,7 +47,7 @@ export interface Product {
 
 export interface ProductFilters {
   search: string
-  category: ProductCategory | 'all'
+  category: ProductCategoryName | 'all'
   sortBy: 'newest' | 'price_asc' | 'price_desc' | 'name_asc'
 }
 

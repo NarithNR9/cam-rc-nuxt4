@@ -6,7 +6,7 @@
       <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
         <div class="text-center">
           <Icon :name="categoryIcon" class="w-16 h-16 text-slate-600 mb-2" />
-          <span class="text-xs text-slate-500">{{ product.category }}</span>
+          <span class="text-xs text-slate-500">{{ categoryName }}</span>
         </div>
       </div>
 
@@ -18,7 +18,7 @@
       </div>
       <div class="absolute top-3 right-3">
         <span class="badge badge-category">
-          {{ product.category }}
+          {{ categoryName }}
         </span>
       </div>
     </div>
@@ -47,6 +47,13 @@ const formattedPrice = computed(() => formatPrice(props.product.price))
 
 const stockConfig = computed(() => getStockStatusConfig(props.product.stock_status))
 
+const categoryName = computed(() => {
+  const cat = props.product.category
+  if (typeof cat === 'string') return cat
+  if (cat && typeof cat === 'object' && 'name' in cat) return cat.name
+  return ''
+})
+
 const categoryIcon = computed(() => {
   const icons: Record<string, string> = {
     Drones: 'heroicons:paper-airplane',
@@ -54,6 +61,6 @@ const categoryIcon = computed(() => {
     Cameras: 'heroicons:camera',
     Accessories: 'heroicons:wrench-screwdriver'
   }
-  return icons[props.product.category] || 'heroicons:cube'
+  return icons[categoryName.value] || 'heroicons:cube'
 })
 </script>

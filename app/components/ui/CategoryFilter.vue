@@ -29,11 +29,13 @@ defineEmits<{
   'update:modelValue': [value: ProductCategoryName | 'all']
 }>()
 
-const categories = [
-  { value: 'all' as const, label: 'All' },
-  { value: 'Drones' as const, label: 'Drones' },
-  { value: 'Gimbals' as const, label: 'Gimbals' },
-  { value: 'Cameras' as const, label: 'Cameras' },
-  { value: 'Accessories' as const, label: 'Accessories' }
-]
+const { t } = useI18n()
+
+const categories = computed(() => [
+  { value: 'all' as const, label: t('common.all') },
+  { value: 'Drones' as const, label: t('category.drones') },
+  { value: 'Gimbals' as const, label: t('category.gimbals') },
+  { value: 'Cameras' as const, label: t('category.cameras') },
+  { value: 'Accessories' as const, label: t('category.accessories') }
+])
 </script>

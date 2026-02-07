@@ -8,8 +8,8 @@
             <img src="/images/logo.png" alt="Cambodia RC" class="h-12 w-12 object-contain" />
             <span class="text-xl font-bold text-slate-100">Cambodia RC</span>
           </div>
-          <p class="text-slate-400 text-sm mb-4 font-khmer">
-            អ្នកលក់ផ្លូវការផលិតផល DJI នៅកម្ពុជា។ Drones, Gimbals, និង Cameras គុណភាពខ្ពស់។
+          <p class="text-slate-400 text-sm mb-4">
+            {{ $t('footer.description') }}
           </p>
           <div class="flex gap-3">
             <a
@@ -41,21 +41,21 @@
 
         <!-- Quick Links -->
         <div>
-          <h4 class="font-semibold text-slate-100 mb-4">Quick Links</h4>
+          <h4 class="font-semibold text-slate-100 mb-4">{{ $t('footer.quickLinks') }}</h4>
           <ul class="space-y-2">
             <li>
-              <NuxtLink to="/" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
-                Home
+              <NuxtLink :to="localePath('/')" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
+                {{ $t('common.home') }}
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/#products" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
-                Products
+              <NuxtLink :to="localePath('/') + '#products'" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
+                {{ $t('common.products') }}
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/categories" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
-                Categories
+              <NuxtLink :to="localePath('/categories')" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">
+                {{ $t('common.categories') }}
               </NuxtLink>
             </li>
             <li>
@@ -68,12 +68,12 @@
 
         <!-- Contact -->
         <div>
-          <h4 class="font-semibold text-slate-100 mb-4">Contact</h4>
+          <h4 class="font-semibold text-slate-100 mb-4">{{ $t('footer.contact') }}</h4>
           <ul class="space-y-3">
             <li class="flex items-start gap-3 text-sm">
               <Icon name="heroicons:map-pin" class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <span class="text-slate-400 font-khmer">
-                ភ្នំពេញ, ប្រទេសកម្ពុជា
+              <span class="text-slate-400">
+                {{ $t('footer.location') }}
               </span>
             </li>
             <li class="flex items-center gap-3 text-sm">
@@ -100,7 +100,7 @@
       <!-- Copyright -->
       <div class="mt-12 pt-8 border-t border-slate-800 text-center">
         <p class="text-slate-500 text-sm">
-          © {{ currentYear }} Cambodia RC. All rights reserved.
+          {{ $t('footer.copyright', { year: currentYear }) }}
         </p>
       </div>
     </div>
@@ -109,6 +109,7 @@
 
 <script setup lang="ts">
 const config = useRuntimeConfig()
+const localePath = useLocalePath()
 
 const phoneNumber = computed(() => config.public.phoneNumber)
 const telegramUsername = computed(() => config.public.telegramUsername)

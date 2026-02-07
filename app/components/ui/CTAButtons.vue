@@ -5,19 +5,19 @@
       :href="telegramUrl"
       target="_blank"
       rel="noopener noreferrer"
-      class="cta-telegram flex-1"
+      class="btn-accent flex-1"
     >
       <Icon name="simple-icons:telegram" class="w-5 h-5" />
-      <span>ធ្វើការបញ្ជាទិញតាម Telegram</span>
+      <span>{{ $t('cta.orderViaTelegram') }}</span>
     </a>
 
     <!-- Phone Support Button -->
     <a
       :href="`tel:${phoneNumber}`"
-      class="cta-phone flex-1"
+      class="btn-ghost flex-1"
     >
       <Icon name="heroicons:phone" class="w-5 h-5" />
-      <span>ទូរស័ព្ទ Support</span>
+      <span>{{ $t('cta.phoneSupport') }}</span>
     </a>
   </div>
 </template>

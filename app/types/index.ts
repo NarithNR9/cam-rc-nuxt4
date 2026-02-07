@@ -6,6 +6,7 @@ export interface Category {
   description: string
   icon?: string
   image?: string | DirectusFile | null
+  product_count?: number
 }
 
 // Product Types for Directus 'products' collection

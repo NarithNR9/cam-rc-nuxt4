@@ -9,10 +9,10 @@
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h2 class="text-2xl md:text-3xl font-bold text-slate-100 mb-2">
-            Our Products
+            {{ $t('products.title') }}
           </h2>
           <p class="text-slate-400">
-            Browse our collection of DJI drones, gimbals, and cameras
+            {{ $t('products.subtitle') }}
           </p>
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="flex flex-col lg:flex-row gap-4 mb-8">
         <!-- Search -->
         <div class="w-full lg:w-80">
-          <UiSearchInput v-model="filters.search" />
+          <UiSearchInput v-model="filters.search" :placeholder="$t('products.searchPlaceholder')" />
         </div>
 
         <!-- Categories -->
@@ -45,7 +45,7 @@
           @click="clearFilters"
         >
           <Icon name="heroicons:x-mark" class="w-4 h-4" />
-          Clear filters
+          {{ $t('common.clearFilters') }}
         </button>
       </div>
 
@@ -63,22 +63,22 @@
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-16">
         <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-400 mx-auto mb-4" />
-        <h3 class="text-xl font-semibold text-slate-100 mb-2">Failed to load products</h3>
+        <h3 class="text-xl font-semibold text-slate-100 mb-2">{{ $t('products.failedToLoad') }}</h3>
         <p class="text-slate-400 mb-4">{{ error.message }}</p>
         <button class="btn-accent" @click="refresh()">
-          Try Again
+          {{ $t('common.tryAgain') }}
         </button>
       </div>
 
       <!-- Empty State -->
       <div v-else-if="filteredProducts.length === 0" class="text-center py-16">
         <Icon name="heroicons:magnifying-glass" class="w-16 h-16 text-slate-600 mx-auto mb-4" />
-        <h3 class="text-xl font-semibold text-slate-100 mb-2">No products found</h3>
+        <h3 class="text-xl font-semibold text-slate-100 mb-2">{{ $t('products.notFound') }}</h3>
         <p class="text-slate-400 mb-4">
-          Try adjusting your search or filter criteria
+          {{ $t('products.notFoundDesc') }}
         </p>
         <button class="btn-ghost" @click="clearFilters">
-          Clear Filters
+          {{ $t('common.clearFilters') }}
         </button>
       </div>
 
@@ -95,6 +95,8 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
+
 const {
   filteredProducts,
   categoryCounts,

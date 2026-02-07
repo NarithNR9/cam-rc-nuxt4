@@ -7,7 +7,7 @@
     <input
       :value="modelValue"
       type="text"
-      placeholder="Search products..."
+      :placeholder="placeholder || 'Search products...'"
       class="search-input"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 defineProps<{
   modelValue: string
+  placeholder?: string
 }>()
 
 defineEmits<{

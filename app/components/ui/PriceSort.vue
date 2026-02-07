@@ -8,10 +8,10 @@
              transition-all duration-200"
       @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value as SortOption)"
     >
-      <option value="newest">Newest First</option>
-      <option value="price_asc">Price: Low to High</option>
-      <option value="price_desc">Price: High to Low</option>
-      <option value="name_asc">Name: A to Z</option>
+      <option value="newest">{{ $t('sort.newest') }}</option>
+      <option value="price_asc">{{ $t('sort.priceLow') }}</option>
+      <option value="price_desc">{{ $t('sort.priceHigh') }}</option>
+      <option value="name_asc">{{ $t('sort.nameAZ') }}</option>
     </select>
     <Icon
       name="heroicons:chevron-down"

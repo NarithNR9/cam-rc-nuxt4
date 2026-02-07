@@ -44,11 +44,11 @@
             <div class="flex flex-col sm:flex-row gap-4">
               <a href="#products" class="btn-accent">
                 <Icon name="heroicons:shopping-bag" class="w-5 h-5" />
-                <span>Browse Products</span>
+                <span>{{ $t('common.browseProducts') }}</span>
               </a>
               <a :href="telegramUrl" target="_blank" class="btn-ghost">
                 <Icon name="simple-icons:telegram" class="w-5 h-5" />
-                <span class="font-khmer">ទាក់ទងយើង</span>
+                <span>{{ $t('common.contactUs') }}</span>
               </a>
             </div>
           </div>

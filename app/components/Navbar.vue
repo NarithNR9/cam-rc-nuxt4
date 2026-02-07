@@ -3,7 +3,7 @@
     <div class="container-app">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2">
+        <NuxtLink :to="localePath('/')" class="flex items-center gap-2">
           <img src="/images/logo.png" alt="Cambodia RC" class="h-12 w-12 object-contain" />
           <span class="text-xl font-bold text-slate-100">Cambodia RC</span>
         </NuxtLink>
@@ -11,23 +11,27 @@
         <!-- Desktop Nav -->
         <div class="hidden md:flex items-center gap-6">
           <NuxtLink
-            to="/"
+            :to="localePath('/')"
             class="text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
           >
-            Home
+            {{ $t('common.home') }}
           </NuxtLink>
           <NuxtLink
-            to="/#products"
+            :to="localePath('/') + '#products'"
             class="text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
           >
-            Products
+            {{ $t('common.products') }}
           </NuxtLink>
           <NuxtLink
-            to="/categories"
+            :to="localePath('/categories')"
             class="text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
           >
-            Categories
+            {{ $t('common.categories') }}
           </NuxtLink>
+
+          <!-- Language Switcher -->
+          <UiLanguageSwitcher />
+
           <a
             :href="telegramUrl"
             target="_blank"
@@ -35,7 +39,7 @@
             class="btn-accent text-sm py-2 px-4"
           >
             <Icon name="simple-icons:telegram" class="w-4 h-4" />
-            <span class="font-khmer">បញ្ជាទិញឥឡូវ</span>
+            <span>{{ $t('nav.orderViaTelegram') }}</span>
           </a>
         </div>
 
@@ -59,26 +63,32 @@
         >
           <div class="flex flex-col gap-3">
             <NuxtLink
-              to="/"
+              :to="localePath('/')"
               class="text-slate-300 hover:text-slate-100 transition-colors py-2"
               @click="mobileMenuOpen = false"
             >
-              Home
+              {{ $t('common.home') }}
             </NuxtLink>
             <NuxtLink
-              to="/#products"
+              :to="localePath('/') + '#products'"
               class="text-slate-300 hover:text-slate-100 transition-colors py-2"
               @click="mobileMenuOpen = false"
             >
-              Products
+              {{ $t('common.products') }}
             </NuxtLink>
             <NuxtLink
-              to="/categories"
+              :to="localePath('/categories')"
               class="text-slate-300 hover:text-slate-100 transition-colors py-2"
               @click="mobileMenuOpen = false"
             >
-              Categories
+              {{ $t('common.categories') }}
             </NuxtLink>
+
+            <!-- Mobile Language Switcher -->
+            <div class="py-2">
+              <UiLanguageSwitcher />
+            </div>
+
             <a
               :href="telegramUrl"
               target="_blank"
@@ -86,7 +96,7 @@
               class="btn-accent text-center mt-2"
             >
               <Icon name="simple-icons:telegram" class="w-5 h-5" />
-              <span class="font-khmer">បញ្ជាទិញឥឡូវ</span>
+              <span>{{ $t('nav.orderViaTelegram') }}</span>
             </a>
           </div>
         </div>
@@ -97,6 +107,7 @@
 
 <script setup lang="ts">
 const config = useRuntimeConfig()
+const localePath = useLocalePath()
 const mobileMenuOpen = ref(false)
 
 const telegramUrl = computed(() => {

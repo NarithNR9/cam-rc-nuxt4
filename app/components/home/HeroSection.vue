@@ -1,5 +1,5 @@
 <template>
-  <section class="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-slate-50 via-white to-red-50">
+  <section class="relative h-[40vh] md:h-[70vh] md:min-h-[400px] max-h-[600px] overflow-hidden">
     <!-- Slides -->
     <div class="absolute inset-0">
       <TransitionGroup name="fade">
@@ -9,81 +9,61 @@
           :key="slide.id"
           class="absolute inset-0"
         >
-          <!-- Background Image/Gradient -->
+          <!-- Background Image -->
           <div
             class="absolute inset-0 bg-cover bg-center"
-            :style="{ backgroundImage: slide.image ? `url(${slide.image})` : undefined }"
-          >
-            <!-- Fallback gradient if no image -->
-            <div
-              v-if="!slide.image"
-              class="absolute inset-0"
-              :class="slide.gradient"
-            />
-          </div>
-          <!-- Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/60" />
+            :style="{ backgroundImage: `url(${slide.image})` }"
+          />
+          <!-- Subtle bottom gradient for text readability -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
       </TransitionGroup>
     </div>
 
-    <!-- Decorative Elements -->
-    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl" />
-    <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
-
-    <!-- Content -->
-    <div class="container-app relative z-10 h-full flex items-center">
-      <div class="max-w-2xl">
-        <TransitionGroup name="slide-up">
-          <div v-show="contentVisible" :key="currentSlide">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              <span class="text-gradient">{{ activeSlide.title }}</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-700 mb-4">
-              {{ activeSlide.subtitle }}
-            </p>
-            <p class="text-lg text-slate-500 mb-8">
-              {{ activeSlide.description }}
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-              <a href="#products" class="btn-accent">
-                <Icon name="heroicons:shopping-bag" class="w-5 h-5" />
-                <span>{{ $t('common.browseProducts') }}</span>
-              </a>
-              <a :href="telegramUrl" target="_blank" class="btn-ghost">
-                <Icon name="simple-icons:telegram" class="w-5 h-5" />
-                <span>{{ $t('common.contactUs') }}</span>
-              </a>
-            </div>
-          </div>
-        </TransitionGroup>
-      </div>
+    <!-- Minimal Content - Bottom Left -->
+    <div class="container-app relative z-10 h-full flex items-end max-md:justify-center pb-6 md:pb-12">
+      <TransitionGroup name="slide-up">
+        <div v-show="contentVisible" :key="currentSlide" class="flex items-center gap-3 md:gap-6">
+          <a href="#products" class="btn-accent max-md:!px-3 max-md:!py-2">
+            <Icon name="heroicons:shopping-bag" class="w-5 h-5" />
+            <span class="text-xs md:text-base">{{ $t('common.browseProducts') }}</span>
+          </a>
+          <a
+            :href="telegramUrl"
+            target="_blank"
+            class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 transition-all font-medium"
+          >
+            <Icon name="simple-icons:telegram" class="w-5 h-5" />
+            <span class="text-xs md:text-base">{{ $t('common.contactUs') }}</span>
+          </a>
+        </div>
+      </TransitionGroup>
     </div>
 
-    <!-- Slide Indicators -->
-    <div class="absolute bottom-6 inset-x-0 z-20 flex justify-center gap-2">
+    <!-- Slide Indicators - Bottom Center -->
+    <div class="absolute bottom-2 md:bottom-6 inset-x-0 z-20 flex justify-center gap-2">
       <button
         v-for="(slide, index) in slides"
         :key="slide.id"
         :class="[
-          'h-2 rounded-full transition-all duration-300',
+          'h-1.5 rounded-full transition-all duration-300',
           currentSlide === index
-            ? 'bg-red-500 w-8'
-            : 'bg-slate-300 hover:bg-slate-400 w-2'
+            ? 'bg-white w-8'
+            : 'bg-white/40 hover:bg-white/60 w-1.5'
         ]"
         @click="goToSlide(index)"
       />
     </div>
 
-    <!-- Navigation Arrows -->
+    <!-- Navigation Arrows - Hidden on mobile -->
     <button
-      class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 border border-slate-200 text-slate-600 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all shadow-sm"
+      class="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all"
       @click="prevSlide"
     >
       <Icon name="heroicons:chevron-left" class="w-6 h-6" />
     </button>
     <button
-      class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/80 border border-slate-200 text-slate-600 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all shadow-sm"
+      class="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all"
       @click="nextSlide"
     >
       <Icon name="heroicons:chevron-right" class="w-6 h-6" />
@@ -94,43 +74,19 @@
 <script setup lang="ts">
 interface HeroSlide {
   id: number
-  title: string
-  subtitle: string
-  description: string
-  image?: string
-  gradient?: string
+  image: string
 }
 
 // Mock slides - will be replaced with API data later
 const slides: HeroSlide[] = [
-  {
-    id: 1,
-    title: 'DJI Mavic 3 Pro',
-    subtitle: 'Flagship Triple-Camera Drone',
-    description: 'Experience unprecedented flight with Hasselblad camera and 43 minutes of flight time.',
-    gradient: 'bg-gradient-to-br from-slate-50 via-red-50 to-white'
-  },
-  {
-    id: 2,
-    title: 'DJI Osmo Pocket 3',
-    subtitle: 'Pocket-Sized Gimbal Camera',
-    description: 'Capture smooth 4K video with one hand. Perfect for Vloggers and content creators.',
-    gradient: 'bg-gradient-to-br from-white via-orange-50 to-slate-50'
-  },
-  {
-    id: 3,
-    title: 'DJI RS 4 Pro',
-    subtitle: 'Professional Gimbal Stabilizer',
-    description: 'Professional-grade stabilization for cinema cameras. 4.5kg payload with 12-hour battery.',
-    gradient: 'bg-gradient-to-br from-slate-50 via-blue-50 to-white'
-  }
+  { id: 1, image: '/heros/hero-1.jpg' },
+  { id: 2, image: '/heros/hero-2.png' },
+  { id: 3, image: '/heros/hero-3.jpg' }
 ]
 
 const config = useRuntimeConfig()
 const currentSlide = ref(0)
 const contentVisible = ref(true)
-
-const activeSlide = computed((): HeroSlide => slides[currentSlide.value]!)
 
 const telegramUrl = computed(() => {
   const username = config.public.telegramUsername
@@ -159,7 +115,7 @@ const prevSlide = () => {
 let slideInterval: ReturnType<typeof setInterval>
 
 onMounted(() => {
-  slideInterval = setInterval(nextSlide, 6000)
+  slideInterval = setInterval(nextSlide, 5000)
 })
 
 onUnmounted(() => {
@@ -169,7 +125,7 @@ onUnmounted(() => {
 // Reset interval when manually changing slides
 const resetInterval = () => {
   clearInterval(slideInterval)
-  slideInterval = setInterval(nextSlide, 6000)
+  slideInterval = setInterval(nextSlide, 5000)
 }
 
 watch(currentSlide, resetInterval)

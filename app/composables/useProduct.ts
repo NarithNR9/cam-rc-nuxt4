@@ -1,14 +1,13 @@
-import { readItem } from '@directus/sdk'
 import type { Product, ProductSpec } from '~/types'
+import { getMockProductById } from '~/data/mockProducts'
 import { getFileId } from '~/composables/useDirectus'
 
 /**
  * Composable for fetching a single product by ID
+ * Currently uses mock data - switch to Directus when backend is ready
  */
 export function useProduct(id: string | number) {
-  const directus = useDirectus()
-
-  // Fetch single product with expanded relations
+  // Use mock data instead of Directus fetch
   const {
     data: product,
     status,
@@ -17,29 +16,9 @@ export function useProduct(id: string | number) {
   } = useAsyncData<Product | null>(
     `product-${id}`,
     async () => {
-      try {
-        const item = await directus.request(
-          readItem('products', id, {
-            fields: [
-              'id',
-              'name',
-              'price',
-              'category',
-              'description',
-              'specs',
-              'image',
-              'gallery.directus_files_id',
-              'stock_status',
-              'featured',
-              'date_created',
-              'date_updated'
-            ]
-          })
-        )
-        return item as Product
-      } catch {
-        return null
-      }
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 200))
+      return getMockProductById(id)
     },
     {
       default: () => null

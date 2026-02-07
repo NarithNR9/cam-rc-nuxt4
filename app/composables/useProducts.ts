@@ -1,13 +1,12 @@
-import { readItems } from '@directus/sdk'
 import type { Product, ProductCategory, ProductFilters } from '~/types'
+import { mockProducts } from '~/data/mockProducts'
 import { getFileId } from '~/composables/useDirectus'
 
 /**
  * Composable for fetching and filtering products
+ * Currently uses mock data - switch to Directus when backend is ready
  */
 export function useProducts() {
-  const directus = useDirectus()
-
   // Reactive filters
   const filters = reactive<ProductFilters>({
     search: '',
@@ -15,7 +14,7 @@ export function useProducts() {
     sortBy: 'newest'
   })
 
-  // Fetch all products from Directus
+  // Use mock data instead of Directus fetch
   const {
     data: products,
     status,
@@ -24,24 +23,9 @@ export function useProducts() {
   } = useAsyncData<Product[]>(
     'products',
     async () => {
-      const items = await directus.request(
-        readItems('products', {
-          fields: [
-            'id',
-            'name',
-            'price',
-            'category',
-            'description',
-            'image',
-            'stock_status',
-            'featured',
-            'date_created'
-          ],
-          sort: ['-date_created'],
-          limit: -1
-        })
-      )
-      return items as Product[]
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 300))
+      return mockProducts
     },
     {
       default: () => []

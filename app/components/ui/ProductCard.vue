@@ -2,18 +2,12 @@
   <NuxtLink :to="`/products/${product.id}`" class="product-card block">
     <!-- Image -->
     <div class="product-card-image">
-      <NuxtImg
-        v-if="imageUrl"
-        provider="directus"
-        :src="imageId || ''"
-        :alt="product.name"
-        width="400"
-        height="400"
-        loading="lazy"
-        class="w-full h-full object-cover"
-      />
-      <div v-else class="w-full h-full flex items-center justify-center">
-        <Icon name="heroicons:photo" class="w-16 h-16 text-slate-600" />
+      <!-- Use placeholder for mock data -->
+      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+        <div class="text-center">
+          <Icon :name="categoryIcon" class="w-16 h-16 text-slate-600 mb-2" />
+          <span class="text-xs text-slate-500">{{ product.category }}</span>
+        </div>
       </div>
 
       <!-- Badges -->
@@ -43,23 +37,23 @@
 
 <script setup lang="ts">
 import type { Product } from '~/types'
-import { formatPrice, getStockStatusConfig, getFileId } from '~/composables/useDirectus'
+import { formatPrice, getStockStatusConfig } from '~/composables/useDirectus'
 
 const props = defineProps<{
   product: Product
 }>()
 
-const { getAssetUrl } = useDirectusAsset()
-
-const imageId = computed(() =>
-  getFileId(props.product.image as string | { id: string } | null)
-)
-
-const imageUrl = computed(() =>
-  imageId.value ? getAssetUrl(imageId.value, { width: 400, height: 400, fit: 'cover' }) : null
-)
-
 const formattedPrice = computed(() => formatPrice(props.product.price))
 
 const stockConfig = computed(() => getStockStatusConfig(props.product.stock_status))
+
+const categoryIcon = computed(() => {
+  const icons: Record<string, string> = {
+    Drones: 'heroicons:paper-airplane',
+    Gimbals: 'heroicons:adjustments-horizontal',
+    Cameras: 'heroicons:camera',
+    Accessories: 'heroicons:wrench-screwdriver'
+  }
+  return icons[props.product.category] || 'heroicons:cube'
+})
 </script>

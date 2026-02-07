@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <HomeHeroSection :featured-product="primaryFeaturedProduct" />
+    <HomeHeroSection />
 
     <!-- Products Section -->
     <section id="products" class="container-app py-16">
@@ -97,7 +97,6 @@
 <script setup lang="ts">
 const {
   filteredProducts,
-  primaryFeaturedProduct,
   categoryCounts,
   filters,
   status,

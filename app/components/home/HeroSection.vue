@@ -57,16 +57,16 @@
 
     <!-- Navigation Arrows - Hidden on mobile -->
     <button
-      class="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all"
+      class="hidden md:flex items-center justify-center absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all"
       @click="prevSlide"
     >
-      <Icon name="heroicons:chevron-left" class="w-6 h-6" />
+      <Icon name="heroicons:chevron-left" class="w-5 h-5" />
     </button>
     <button
-      class="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all"
+      class="hidden md:flex items-center justify-center absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all"
       @click="nextSlide"
     >
-      <Icon name="heroicons:chevron-right" class="w-6 h-6" />
+      <Icon name="heroicons:chevron-right" class="w-5 h-5" />
     </button>
   </section>
 </template>

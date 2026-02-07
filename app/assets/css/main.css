@@ -1,8 +1,310 @@
-/* app/assets/css/main.css */
+/* Cambodia RC - Light Theme with Red Accents */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties */
+:root {
+  --color-base: #ffffff;
+  --color-surface: #f8fafc;
+  --color-surface-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-accent: #dc2626;
+  --color-accent-hover: #b91c1c;
+  --color-accent-light: #fef2f2;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(226, 232, 240, 0.8);
+}
+
+/* Base Styles */
 body {
-  @apply bg-slate-950 text-slate-50;
+  @apply bg-white text-slate-800 antialiased;
+  font-family: 'Inter', 'Kantumruy Pro', system-ui, sans-serif;
+}
+
+.font-khmer {
+  font-family: 'Kantumruy Pro', 'Inter', system-ui, sans-serif;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  @apply bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm;
+}
+
+/* Product Card */
+.product-card {
+  @apply bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm;
+}
+
+.product-card:hover {
+  @apply border-red-200 transform -translate-y-1;
+  box-shadow: 0 10px 40px rgba(220, 38, 38, 0.1), 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.product-card-image {
+  @apply relative aspect-square overflow-hidden bg-slate-100;
+}
+
+.product-card-image img {
+  @apply w-full h-full object-cover transition-transform duration-500;
+}
+
+.product-card:hover .product-card-image img {
+  @apply scale-105;
+}
+
+/* Buttons */
+.btn-accent {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3
+         bg-gradient-to-r from-red-600 to-red-500
+         hover:from-red-700 hover:to-red-600
+         text-white font-semibold rounded-xl
+         transition-all duration-300
+         shadow-lg shadow-red-500/25 hover:shadow-red-500/40;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3
+         bg-slate-100 hover:bg-slate-200
+         border border-slate-200 hover:border-slate-300
+         text-slate-700 font-medium rounded-xl
+         transition-all duration-300;
+}
+
+/* Search Input */
+.search-input {
+  @apply w-full bg-white border border-slate-200
+         rounded-xl px-4 py-3 pl-11
+         text-slate-800 placeholder-slate-400
+         focus:outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100
+         transition-all duration-200 shadow-sm;
+}
+
+/* Category Pills */
+.category-pill {
+  @apply inline-flex items-center gap-2 px-4 py-2
+         bg-white border border-slate-200
+         text-slate-600 rounded-full text-sm font-medium
+         transition-all duration-200 cursor-pointer shadow-sm;
+}
+
+.category-pill:hover {
+  @apply border-slate-300 text-slate-800 bg-slate-50;
+}
+
+.category-pill.active {
+  @apply bg-red-50 border-red-300 text-red-600;
+}
+
+/* Price Tag */
+.price-tag {
+  @apply text-2xl font-bold text-red-600;
+}
+
+.price-tag-lg {
+  @apply text-3xl md:text-4xl font-bold text-red-600;
+}
+
+/* Text Gradient */
+.text-gradient {
+  @apply bg-gradient-to-r from-red-600 via-red-500 to-red-600
+         bg-clip-text text-transparent;
+}
+
+/* Navbar */
+.navbar-glass {
+  @apply fixed top-0 left-0 right-0 z-50
+         bg-white/95 backdrop-blur-xl
+         border-b border-slate-200 shadow-sm;
+}
+
+/* CTA Buttons - Khmer Style */
+.cta-telegram {
+  @apply btn-accent font-khmer;
+}
+
+.cta-phone {
+  @apply btn-ghost font-khmer;
+}
+
+/* Stock Badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-in-stock {
+  @apply bg-emerald-50 text-emerald-600 border border-emerald-200;
+}
+
+.badge-low-stock {
+  @apply bg-amber-50 text-amber-600 border border-amber-200;
+}
+
+.badge-out-of-stock {
+  @apply bg-red-50 text-red-600 border border-red-200;
+}
+
+.badge-pre-order {
+  @apply bg-blue-50 text-blue-600 border border-blue-200;
+}
+
+.badge-category {
+  @apply bg-slate-100 text-slate-600 border border-slate-200;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  @apply bg-slate-200 animate-pulse rounded-lg;
+}
+
+.skeleton-card {
+  @apply bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm;
+}
+
+.skeleton-image {
+  @apply aspect-square bg-slate-200 animate-pulse;
+}
+
+.skeleton-text {
+  @apply h-4 bg-slate-200 animate-pulse rounded;
+}
+
+.skeleton-text-lg {
+  @apply h-6 bg-slate-200 animate-pulse rounded;
+}
+
+/* Hero Section */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.7) 100%
+  );
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
+}
+
+/* Selection */
+::selection {
+  @apply bg-red-100 text-red-800;
+}
+
+/* Focus Visible */
+:focus-visible {
+  @apply outline-none ring-2 ring-red-400 ring-offset-2 ring-offset-white;
+}
+
+/* Image Gallery */
+.gallery-main {
+  @apply aspect-square bg-slate-100 rounded-2xl overflow-hidden;
+}
+
+.gallery-thumb {
+  @apply aspect-square bg-slate-100 rounded-lg overflow-hidden cursor-pointer
+         border-2 border-transparent transition-all duration-200;
+}
+
+.gallery-thumb:hover {
+  @apply border-slate-300;
+}
+
+.gallery-thumb.active {
+  @apply border-red-500;
+}
+
+/* Spec List */
+.spec-group {
+  @apply bg-slate-50 border border-slate-200 rounded-xl p-4;
+}
+
+.spec-group-title {
+  @apply flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3;
+}
+
+.spec-item {
+  @apply flex justify-between items-center py-2 border-b border-slate-100 last:border-0;
+}
+
+.spec-label {
+  @apply text-sm text-slate-500;
+}
+
+.spec-value {
+  @apply text-sm text-slate-800 font-medium;
+}
+
+/* Responsive Grid */
+.product-grid {
+  @apply grid gap-4 md:gap-6;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Container */
+.container-app {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Fade Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Slide Up Transitions */
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Mobile Menu Transitions (for Teleported content) */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-down-enter-from,
+.slide-down-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
 }

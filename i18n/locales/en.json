@@ -1,0 +1,76 @@
+{
+  "common": {
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "search": "Search",
+    "all": "All",
+    "viewDetails": "View Details",
+    "browseProducts": "Browse Products",
+    "contactUs": "Contact Us",
+    "orderNow": "Order Now",
+    "tryAgain": "Try Again",
+    "clearFilters": "Clear filters",
+    "backTo": "Back to",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "orderViaTelegram": "Order Now"
+  },
+  "hero": {
+    "title1": "DJI Products",
+    "title2": "in Cambodia",
+    "description": "Official DJI products in Cambodia. Drones, Gimbals, and Cameras for professionals."
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Browse our collection of DJI drones, gimbals, and cameras",
+    "searchPlaceholder": "Search products...",
+    "notFound": "No products found",
+    "notFoundDesc": "Try adjusting your search or filter criteria",
+    "failedToLoad": "Failed to load products",
+    "productNotFound": "Product Not Found",
+    "productNotFoundDesc": "The product you're looking for doesn't exist or has been removed.",
+    "browseAll": "Browse All Products",
+    "specifications": "Specifications"
+  },
+  "categories": {
+    "title": "Product Categories",
+    "subtitle": "Browse our products by category",
+    "browse": "Browse",
+    "productsCount": "{count} products",
+    "notFound": "Category Not Found",
+    "notFoundDesc": "The category you're looking for doesn't exist.",
+    "viewAll": "View All Categories",
+    "allCategories": "All Categories"
+  },
+  "category": {
+    "drones": "Drones",
+    "gimbals": "Gimbals",
+    "cameras": "Cameras",
+    "accessories": "Accessories"
+  },
+  "sort": {
+    "newest": "Newest First",
+    "priceLow": "Price: Low to High",
+    "priceHigh": "Price: High to Low",
+    "nameAZ": "Name: A to Z"
+  },
+  "stock": {
+    "inStock": "In Stock",
+    "lowStock": "Low Stock",
+    "outOfStock": "Out of Stock",
+    "preOrder": "Pre-Order"
+  },
+  "cta": {
+    "orderViaTelegram": "Order via Telegram",
+    "phoneSupport": "Phone Support"
+  },
+  "footer": {
+    "description": "Official DJI product dealer in Cambodia. High-quality Drones, Gimbals, and Cameras.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "location": "#35, St 105, Sangkat Boeng Prolet, Khan 7Makara, Phnom Penh, Cambodia",
+    "copyright": "© {year} Cambodia RC. All rights reserved."
+  }
+}

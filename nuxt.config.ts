@@ -1,39 +1,65 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  // Nuxt 4 features
+  compatibilityDate: '2024-04-03',
   future: {
     compatibilityVersion: 4,
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
+
+  app: {
+    head: {
+            link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kantumruy+Pro:wght@400;500;600;700&display=swap'
+        }
+      ]
+    }
+  },
 
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
     '@nuxtjs/seo',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    '@nuxtjs/i18n'
   ],
-  // Directus and App constants
-  runtimeConfig: {
-    public: {
-      directusUrl: process.env.DIRECTUS_URL || 'https://your-directus-api.com'
+
+  i18n: {
+    locales: [
+      { code: 'en', language: 'en-US', name: 'EN', file: 'en.json' },
+      { code: 'km', language: 'km-KH', name: 'ខ្មែរ', file: 'km.json' }
+    ],
+    defaultLocale: 'en',
+    langDir: 'locales',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      fallbackLocale: 'en'
     }
   },
 
-  // Image optimization for Directus
-  image: {
-    directus: {
-      baseURL: 'https://your-directus-api.com/assets/'
+  runtimeConfig: {
+    public: {
+      directusUrl: process.env.DIRECTUS_URL || 'https://your-directus-api.com',
+      telegramUsername: process.env.TELEGRAM_USERNAME || 'cambodiarc',
+      phoneNumber: process.env.PHONE_NUMBER || '+855 12 345 678'
     }
   },
+
+  image: {
+    directus: {
+      baseURL: (process.env.DIRECTUS_URL || 'https://your-directus-api.com') + '/assets/'
+    }
+  },
+
   css: ['~/assets/css/main.css'],
 
   routeRules: {
-    // 1. Homepage: Cache for 1 hour, refresh in background
-    '/': { swr: 3600 }, 
-
-    // 2. Product Detail Pages: Cache for 1 day (or until you update)
-    '/products/**': { isr: 86400 },
-
+    '/': { swr: 3600 },
+    '/products/**': { isr: 86400 }
   }
 })

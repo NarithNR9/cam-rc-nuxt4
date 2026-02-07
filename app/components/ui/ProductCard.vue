@@ -2,8 +2,16 @@
   <NuxtLink :to="localePath(`/products/${product.id}`)" class="product-card block">
     <!-- Image -->
     <div class="product-card-image">
-      <!-- Use placeholder for mock data -->
-      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+      <!-- Show actual image if URL exists -->
+      <img
+        v-if="imageUrl"
+        :src="imageUrl"
+        :alt="product.name"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <!-- Fallback placeholder -->
+      <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
         <div class="text-center">
           <Icon :name="categoryIcon" class="w-16 h-16 text-slate-400 mb-2" />
           <span class="text-xs text-slate-500">{{ categoryName }}</span>
@@ -64,5 +72,21 @@ const categoryIcon = computed(() => {
     Accessories: 'heroicons:wrench-screwdriver'
   }
   return icons[categoryName.value] || 'heroicons:cube'
+})
+
+const imageUrl = computed(() => {
+  const img = props.product.image
+  if (!img) return null
+  // If it's a string URL (starts with http or /)
+  if (typeof img === 'string') {
+    if (img.startsWith('http') || img.startsWith('/')) {
+      return img
+    }
+  }
+  // If it's a DirectusFile object with id
+  if (typeof img === 'object' && img && 'id' in img) {
+    return `${useRuntimeConfig().public.directusUrl}/assets/${img.id}`
+  }
+  return null
 })
 </script>

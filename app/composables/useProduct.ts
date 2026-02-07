@@ -25,10 +25,17 @@ export function useProduct(id: string | number) {
     }
   )
 
-  // Primary image ID
+  // Primary image URL or ID
   const primaryImageId = computed(() => {
     if (!product.value) return null
-    return getFileId(product.value.image as string | { id: string } | null)
+    const img = product.value.image
+    if (!img) return null
+    // If it's already a full URL, return as-is
+    if (typeof img === 'string' && (img.startsWith('http') || img.startsWith('/'))) {
+      return img
+    }
+    // Otherwise use getFileId for Directus file objects
+    return getFileId(img as string | { id: string } | null)
   })
 
   // Gallery image IDs

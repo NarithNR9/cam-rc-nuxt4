@@ -130,19 +130,25 @@ const categorySlug = computed(() => {
   return categoryName.value.toLowerCase()
 })
 
+// Helper to get image URL (handles both URLs and Directus file IDs)
+const getImageUrl = (img: string | { id: string } | null | undefined): string | undefined => {
+  if (!img) return undefined
+  // If it's already a full URL, return as-is
+  if (typeof img === 'string' && img.startsWith('http')) {
+    return img
+  }
+  // Otherwise construct Directus asset URL
+  const imageId = typeof img === 'string' ? img : img.id
+  return getOgImageUrl(imageId)
+}
+
 // Dynamic SEO Meta
 useSeoMeta({
   title: () => product.value ? `${product.value.name} | Cambodia RC` : 'Product | Cambodia RC',
   description: () => product.value?.description || 'DJI product available at Cambodia RC',
   ogTitle: () => product.value?.name || 'Product',
   ogDescription: () => product.value?.description || 'DJI product available at Cambodia RC',
-  ogImage: () => {
-    if (!product.value) return undefined
-    const imageId = typeof product.value.image === 'string'
-      ? product.value.image
-      : product.value.image?.id
-    return getOgImageUrl(imageId)
-  },
+  ogImage: () => product.value ? getImageUrl(product.value.image as string | { id: string } | null) : undefined,
   ogType: 'website',
   twitterCard: 'summary_large_image'
 })
@@ -154,15 +160,12 @@ useHead({
       type: 'application/ld+json',
       innerHTML: computed(() => {
         if (!product.value) return '{}'
-        const imageId = typeof product.value.image === 'string'
-          ? product.value.image
-          : product.value.image?.id
         return JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Product',
           name: product.value.name,
           description: product.value.description,
-          image: getOgImageUrl(imageId),
+          image: getImageUrl(product.value.image as string | { id: string } | null),
           offers: {
             '@type': 'Offer',
             price: product.value.price,

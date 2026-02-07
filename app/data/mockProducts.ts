@@ -17,7 +17,7 @@ export const mockProducts: Product[] = [
       { label: 'Obstacle Sensing', value: 'Omnidirectional', group: 'Flight' },
       { label: 'Weight', value: '958g', group: 'Dimensions' }
     ],
-    image: 'mavic-3-pro',
+    image: 'https://m.media-amazon.com/images/I/619suQHw+CL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
     featured: true,
@@ -37,7 +37,7 @@ export const mockProducts: Product[] = [
       { label: 'Max Speed', value: '16 m/s', group: 'Flight' },
       { label: 'Weight', value: '249g', group: 'Dimensions' }
     ],
-    image: 'mini-4-pro',
+    image: 'https://m.media-amazon.com/images/I/61d2sc1YAQL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
     featured: false,
@@ -57,7 +57,7 @@ export const mockProducts: Product[] = [
       { label: 'Optical Zoom', value: '3x Medium Tele', group: 'Camera' },
       { label: 'Weight', value: '720g', group: 'Dimensions' }
     ],
-    image: 'air-3',
+    image: 'https://www.uavoom.com/cdn/shop/files/1d3a469ea62eb9331238ba2683d39d1d_origin.jpg?v=1690428775',
     gallery: null,
     stock_status: 'low_stock',
     featured: true,
@@ -77,7 +77,7 @@ export const mockProducts: Product[] = [
       { label: 'Roll Range', value: '-220° to +100°', group: 'Gimbal' },
       { label: 'Weight', value: '1.51 kg', group: 'Dimensions' }
     ],
-    image: 'rs-4-pro',
+    image: 'https://m.media-amazon.com/images/I/61rhwQDa2nL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
     featured: false,
@@ -97,7 +97,7 @@ export const mockProducts: Product[] = [
       { label: 'LiDAR Range', value: '10m', group: 'General' },
       { label: 'Stabilization', value: '4-Axis Gimbal', group: 'Gimbal' }
     ],
-    image: 'ronin-4d',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8g2yClzf3-tM_zEWBCSrO9N_j6Y3Rx0ouQ&s',
     gallery: null,
     stock_status: 'pre_order',
     featured: false,
@@ -117,7 +117,7 @@ export const mockProducts: Product[] = [
       { label: 'Battery Life', value: '166 minutes', group: 'Battery' },
       { label: 'Weight', value: '179g', group: 'Dimensions' }
     ],
-    image: 'osmo-pocket-3',
+    image: 'https://tiendadedrones.com.ar/wp-content/uploads/2024/08/1000x1000-RCDJI059-1.jpg.webp',
     gallery: null,
     stock_status: 'in_stock',
     featured: true,
@@ -136,7 +136,7 @@ export const mockProducts: Product[] = [
       { label: 'Weight', value: '795g', group: 'Dimensions' },
       { label: 'Bluetooth', value: 'Shutter Control', group: 'General' }
     ],
-    image: 'rs-3-mini',
+    image: 'https://djiindiashop.com/cdn/shop/files/4_4c9a45d5-2c47-4c98-9252-445373254cc1.jpg?v=1725863412&width=2560',
     gallery: null,
     stock_status: 'in_stock',
     featured: false,
@@ -156,7 +156,7 @@ export const mockProducts: Product[] = [
       { label: 'Max Speed', value: '27 m/s', group: 'Flight' },
       { label: 'Weight', value: '377g', group: 'Dimensions' }
     ],
-    image: 'avata-2',
+    image: 'https://m.media-amazon.com/images/I/71hc7wNXBZL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
     featured: false,
@@ -175,7 +175,7 @@ export const mockProducts: Product[] = [
       { label: 'Noise Cancellation', value: 'Intelligent NC', group: 'General' },
       { label: 'Connectivity', value: 'USB-C, Lightning, 3.5mm', group: 'General' }
     ],
-    image: 'mic-2',
+    image: 'https://m.media-amazon.com/images/I/61h78MEXojL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
     featured: false,
@@ -195,7 +195,7 @@ export const mockProducts: Product[] = [
       { label: 'USB Ports', value: '2x USB-A, 2x USB-C', group: 'General' },
       { label: 'Weight', value: '12.9 kg', group: 'Dimensions' }
     ],
-    image: 'power-1000',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_moFwEHf-m8nhNGEQnEkM3GYzVDk08sAJLg&s',
     gallery: null,
     stock_status: 'out_of_stock',
     featured: false,
@@ -215,7 +215,7 @@ export const mockProducts: Product[] = [
       { label: 'Battery Life', value: '160 minutes', group: 'Battery' },
       { label: 'Weight', value: '145g', group: 'Dimensions' }
     ],
-    image: 'action-4',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNGrfkxPEkDZmsCT95gx1hQ4o7s9sPlOMOpA&s',
     gallery: null,
     stock_status: 'in_stock',
     featured: false,
@@ -235,7 +235,7 @@ export const mockProducts: Product[] = [
       { label: 'Battery Life', value: '2.5 hours', group: 'Battery' },
       { label: 'Weight', value: '290g', group: 'Dimensions' }
     ],
-    image: 'goggles-3',
+    image: 'https://m.media-amazon.com/images/I/6184JUNS83L._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'low_stock',
     featured: false,

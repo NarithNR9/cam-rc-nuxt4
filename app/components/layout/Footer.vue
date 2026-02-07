@@ -13,7 +13,7 @@
           </p>
           <div class="flex gap-3">
             <a
-              href="https://facebook.com/cambodiarc"
+              href="https://facebook.com/djidealerKH"
               target="_blank"
               rel="noopener noreferrer"
               class="p-2 rounded-lg bg-white border border-slate-200 hover:border-red-300 text-slate-500 hover:text-red-600 transition-colors"
@@ -21,15 +21,15 @@
               <Icon name="simple-icons:facebook" class="w-5 h-5" />
             </a>
             <a
-              href="https://instagram.com/cambodiarc"
+              href="https://www.tiktok.com/@crc.dji"
               target="_blank"
               rel="noopener noreferrer"
               class="p-2 rounded-lg bg-white border border-slate-200 hover:border-red-300 text-slate-500 hover:text-red-600 transition-colors"
             >
-              <Icon name="simple-icons:instagram" class="w-5 h-5" />
+              <Icon name="simple-icons:tiktok" class="w-5 h-5" />
             </a>
             <a
-              href="https://t.me/cambodiarc"
+              href="https://t.me/crc_dji"
               target="_blank"
               rel="noopener noreferrer"
               class="p-2 rounded-lg bg-white border border-slate-200 hover:border-red-300 text-slate-500 hover:text-red-600 transition-colors"
@@ -72,9 +72,14 @@
           <ul class="space-y-3">
             <li class="flex items-start gap-3 text-sm">
               <Icon name="heroicons:map-pin" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-              <span class="text-slate-500">
+              <a
+                href="https://maps.app.goo.gl/WNZp4RhCRRsy55tK7"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-500 hover:text-red-600 transition-colors"
+              >
                 {{ $t('footer.location') }}
-              </span>
+              </a>
             </li>
             <li class="flex items-center gap-3 text-sm">
               <Icon name="heroicons:phone" class="w-5 h-5 text-red-500 flex-shrink-0" />

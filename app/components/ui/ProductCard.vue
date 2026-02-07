@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/products/${product.id}`" class="product-card block">
+  <NuxtLink :to="localePath(`/products/${product.id}`)" class="product-card block">
     <!-- Image -->
     <div class="product-card-image">
       <!-- Use placeholder for mock data -->
@@ -38,6 +38,8 @@
 <script setup lang="ts">
 import type { Product } from '~/types'
 import { formatPrice, getStockStatusConfig } from '~/composables/useDirectus'
+
+const localePath = useLocalePath()
 
 const props = defineProps<{
   product: Product

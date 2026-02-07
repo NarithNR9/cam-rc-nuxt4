@@ -2,7 +2,7 @@
   <div class="container-app py-8">
     <!-- Back Navigation -->
     <NuxtLink
-      to="/#products"
+      :to="localePath('/') + '#products'"
       class="inline-flex items-center gap-2 text-slate-500 hover:text-red-600 mb-8 transition-colors"
     >
       <Icon name="heroicons:arrow-left" class="w-5 h-5" />
@@ -26,7 +26,7 @@
       <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-500 mx-auto mb-4" />
       <h2 class="text-2xl font-bold text-slate-800 mb-2">Product Not Found</h2>
       <p class="text-slate-500 mb-6">The product you're looking for doesn't exist or has been removed.</p>
-      <NuxtLink to="/" class="btn-accent">
+      <NuxtLink :to="localePath('/')" class="btn-accent">
         Browse All Products
       </NuxtLink>
     </div>
@@ -42,7 +42,12 @@
       <div class="space-y-6">
         <!-- Category & Stock -->
         <div class="flex items-center gap-3">
-          <span class="badge badge-category">{{ product.category }}</span>
+          <NuxtLink
+            :to="localePath(`/categories/${categorySlug}`)"
+            class="badge badge-category hover:bg-slate-200 hover:border-slate-300 transition-colors"
+          >
+            {{ categoryName }}
+          </NuxtLink>
           <span :class="['badge', stockConfig.bgColor]">
             {{ stockConfig.label }}
           </span>
@@ -87,6 +92,7 @@
 <script setup lang="ts">
 import { formatPrice, getStockStatusConfig } from '~/composables/useDirectus'
 
+const localePath = useLocalePath()
 const route = useRoute()
 const productId = route.params.id as string
 
@@ -107,6 +113,22 @@ const formattedPrice = computed(() =>
 const stockConfig = computed(() =>
   product.value ? getStockStatusConfig(product.value.stock_status) : getStockStatusConfig('in_stock')
 )
+
+const categoryName = computed(() => {
+  if (!product.value) return ''
+  const cat = product.value.category
+  if (typeof cat === 'string') return cat
+  if (cat && typeof cat === 'object' && 'name' in cat) return cat.name
+  return ''
+})
+
+const categorySlug = computed(() => {
+  if (!product.value) return ''
+  const cat = product.value.category
+  if (typeof cat === 'object' && cat && 'slug' in cat) return cat.slug
+  // Convert category name to slug (lowercase)
+  return categoryName.value.toLowerCase()
+})
 
 // Dynamic SEO Meta
 useSeoMeta({

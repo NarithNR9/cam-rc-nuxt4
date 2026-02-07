@@ -29,7 +29,7 @@
       <NuxtLink
         v-for="category in categories"
         :key="category.id"
-        :to="`/categories/${category.slug}`"
+        :to="localePath(`/categories/${category.slug}`)"
         class="glass-card p-6 group hover:border-red-200 transition-all duration-300"
       >
         <div class="flex items-start gap-4">
@@ -65,6 +65,7 @@
 </template>
 
 <script setup lang="ts">
+const localePath = useLocalePath()
 const { categories, status } = useCategories()
 
 useSeoMeta({

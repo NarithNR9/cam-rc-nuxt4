@@ -32,7 +32,7 @@
           <!-- Language Switcher -->
           <UiLanguageSwitcher />
 
-          <a
+          <!-- <a
             :href="telegramUrl"
             target="_blank"
             rel="noopener noreferrer"
@@ -40,7 +40,7 @@
           >
             <Icon name="simple-icons:telegram" class="w-4 h-4" />
             <span>{{ $t('nav.orderViaTelegram') }}</span>
-          </a>
+          </a> -->
         </div>
 
         <!-- Mobile Menu Button -->
@@ -89,7 +89,7 @@
               <UiLanguageSwitcher />
             </div>
 
-            <a
+            <!-- <a
               :href="telegramUrl"
               target="_blank"
               rel="noopener noreferrer"
@@ -97,7 +97,7 @@
             >
               <Icon name="simple-icons:telegram" class="w-5 h-5" />
               <span>{{ $t('nav.orderViaTelegram') }}</span>
-            </a>
+            </a> -->
           </div>
         </div>
       </Transition>

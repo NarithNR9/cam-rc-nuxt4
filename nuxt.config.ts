@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   app: {
     head: {
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'en', language: 'en-US', name: 'EN', file: 'en.json' },
       { code: 'km', language: 'km-KH', name: 'ខ្មែរ', file: 'km.json' }
     ],
     defaultLocale: 'en',

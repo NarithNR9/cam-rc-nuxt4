@@ -2,7 +2,7 @@
   <div class="container-app py-8">
     <!-- Back Navigation -->
     <NuxtLink
-      to="/categories"
+      :to="localePath('/categories')"
       class="inline-flex items-center gap-2 text-slate-500 hover:text-red-600 mb-6 transition-colors"
     >
       <Icon name="heroicons:arrow-left" class="w-5 h-5" />
@@ -31,7 +31,7 @@
       <Icon name="heroicons:folder-open" class="w-16 h-16 text-slate-400 mx-auto mb-4" />
       <h2 class="text-2xl font-bold text-slate-800 mb-2">Category Not Found</h2>
       <p class="text-slate-500 mb-6">The category you're looking for doesn't exist.</p>
-      <NuxtLink to="/categories" class="btn-accent">
+      <NuxtLink :to="localePath('/categories')" class="btn-accent">
         View All Categories
       </NuxtLink>
     </div>
@@ -104,6 +104,7 @@
 <script setup lang="ts">
 import type { Product } from '~/types'
 
+const localePath = useLocalePath()
 const route = useRoute()
 const slug = route.params.slug as string
 

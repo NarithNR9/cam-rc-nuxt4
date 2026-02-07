@@ -1,11 +1,100 @@
 <template>
-  <nav class="flex justifym-between">
-    <div class="flex items-center">
-      <NuxtLink to="/" class="text-xl font-bold">Cam RC</NuxtLink>
-    </div>
-    <div class="flex items-center">
-      <NuxtLink to="/products" class="ml-4">Products</NuxtLink>
+  <nav class="navbar-glass">
+    <div class="container-app">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <NuxtLink to="/" class="flex items-center gap-2">
+          <Icon name="heroicons:cube" class="w-8 h-8 text-red-500" />
+          <span class="text-xl font-bold text-slate-100">Cambodia RC</span>
+        </NuxtLink>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-6">
+          <NuxtLink
+            to="/"
+            class="text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
+          >
+            Home
+          </NuxtLink>
+          <NuxtLink
+            to="/#products"
+            class="text-slate-300 hover:text-slate-100 transition-colors text-sm font-medium"
+          >
+            Products
+          </NuxtLink>
+          <a
+            :href="telegramUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-accent text-sm py-2 px-4"
+          >
+            <Icon name="simple-icons:telegram" class="w-4 h-4" />
+            <span class="font-khmer">បញ្ជាទិញឥឡូវ</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden p-2 text-slate-300 hover:text-slate-100"
+          @click="mobileMenuOpen = !mobileMenuOpen"
+        >
+          <Icon
+            :name="mobileMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'"
+            class="w-6 h-6"
+          />
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <Transition name="slide-up">
+        <div
+          v-if="mobileMenuOpen"
+          class="md:hidden py-4 border-t border-slate-800"
+        >
+          <div class="flex flex-col gap-3">
+            <NuxtLink
+              to="/"
+              class="text-slate-300 hover:text-slate-100 transition-colors py-2"
+              @click="mobileMenuOpen = false"
+            >
+              Home
+            </NuxtLink>
+            <NuxtLink
+              to="/#products"
+              class="text-slate-300 hover:text-slate-100 transition-colors py-2"
+              @click="mobileMenuOpen = false"
+            >
+              Products
+            </NuxtLink>
+            <a
+              :href="telegramUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-accent text-center mt-2"
+            >
+              <Icon name="simple-icons:telegram" class="w-5 h-5" />
+              <span class="font-khmer">បញ្ជាទិញឥឡូវ</span>
+            </a>
+          </div>
+        </div>
+      </Transition>
     </div>
   </nav>
 </template>
-  
+
+<script setup lang="ts">
+const config = useRuntimeConfig()
+const mobileMenuOpen = ref(false)
+
+const telegramUrl = computed(() => {
+  const username = config.public.telegramUsername
+  const message = 'សួស្តី! ខ្ញុំចង់សាកសួរអំពីផលិតផល។'
+  return `https://t.me/${username}?text=${encodeURIComponent(message)}`
+})
+
+// Close mobile menu on route change
+const route = useRoute()
+watch(() => route.path, () => {
+  mobileMenuOpen.value = false
+})
+</script>

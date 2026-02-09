@@ -1,3 +1,4 @@
+import { readItems, readItem, aggregate } from '@directus/sdk'
 import type { StockStatus, StockStatusConfig } from '~/types'
 
 /**
@@ -6,6 +7,14 @@ import type { StockStatus, StockStatusConfig } from '~/types'
 export function useDirectus() {
   const { $directus } = useNuxtApp()
   return $directus
+}
+
+/**
+ * Typed Directus client with SDK helpers
+ */
+export function useDirectusClient() {
+  const directus = useDirectus()
+  return { directus, readItems, readItem, aggregate }
 }
 
 /**
@@ -26,7 +35,8 @@ export function useDirectusAsset() {
   ): string => {
     if (!fileId) return '/images/placeholder.svg'
 
-    const baseUrl = `${config.public.directusUrl}/assets/${fileId}`
+    const directusUrl = config.public.directusUrl.replace(/\/+$/, '')
+    const baseUrl = `${directusUrl}/assets/${fileId}`
     const params = new URLSearchParams()
 
     if (options?.width) params.set('width', options.width.toString())

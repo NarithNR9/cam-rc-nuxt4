@@ -1,6 +1,6 @@
 // Category Types for Directus 'categories' collection
 export interface Category {
-  id: string
+  id: number
   name: string
   slug: string
   description: string
@@ -31,7 +31,7 @@ export interface DirectusFile {
 }
 
 export interface Product {
-  id: string | number
+  id: number
   name: string
   price: number
   category: ProductCategoryName | string | Category
@@ -41,14 +41,13 @@ export interface Product {
   image: string | DirectusFile | null
   gallery: Array<{ directus_files_id: string | DirectusFile }> | null
   stock_status: StockStatus
-  featured: boolean
   date_created?: string
   date_updated?: string
 }
 
 export interface ProductFilters {
   search: string
-  category: ProductCategoryName | 'all'
+  category: ProductCategoryName | 'all' | string
   sortBy: 'newest' | 'price_asc' | 'price_desc' | 'name_asc'
 }
 

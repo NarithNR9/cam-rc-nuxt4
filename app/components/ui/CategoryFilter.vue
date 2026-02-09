@@ -21,12 +21,12 @@
 import type { ProductCategoryName } from '~/types'
 
 defineProps<{
-  modelValue: ProductCategoryName | 'all'
+  modelValue: ProductCategoryName | 'all' | string
   counts: Record<string, number>
 }>()
 
 defineEmits<{
-  'update:modelValue': [value: ProductCategoryName | 'all']
+  'update:modelValue': [value: ProductCategoryName | 'all' | string]
 }>()
 
 const { t } = useI18n()

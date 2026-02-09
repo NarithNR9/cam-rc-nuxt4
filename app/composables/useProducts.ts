@@ -1,12 +1,12 @@
-import type { Product, ProductCategoryName, ProductFilters } from '~/types'
-import { mockProducts } from '~/data/mockProducts'
+import type { Product, ProductFilters } from '~/types'
 import { getFileId } from '~/composables/useDirectus'
 
 /**
- * Composable for fetching and filtering products
- * Currently uses mock data - switch to Directus when backend is ready
+ * Composable for fetching and filtering products from Directus
  */
 export function useProducts() {
+  const { directus, readItems } = useDirectusClient()
+
   // Reactive filters
   const filters = reactive<ProductFilters>({
     search: '',
@@ -14,7 +14,6 @@ export function useProducts() {
     sortBy: 'newest'
   })
 
-  // Use mock data instead of Directus fetch
   const {
     data: products,
     status,
@@ -23,9 +22,15 @@ export function useProducts() {
   } = useAsyncData<Product[]>(
     'products',
     async () => {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 300))
-      return mockProducts
+      const items = await directus.request(
+        readItems('products', {
+          filter: { status: { _eq: 'published' } },
+          fields: ['*', 'category.id', 'category.name', 'category.slug', 'image.*'],
+          sort: ['sort'],
+          limit: -1
+        })
+      )
+      return items as Product[]
     },
     {
       default: () => []
@@ -50,7 +55,11 @@ export function useProducts() {
 
     // Category filter
     if (filters.category !== 'all') {
-      result = result.filter((p) => p.category === filters.category)
+      result = result.filter((p) => {
+        const cat = p.category
+        if (typeof cat === 'object' && cat && 'name' in cat) return cat.name === filters.category
+        return cat === filters.category
+      })
     }
 
     // Sort
@@ -76,26 +85,18 @@ export function useProducts() {
     return result
   })
 
-  // Featured products for hero
-  const featuredProducts = computed(() => {
-    if (!products.value) return []
-    return products.value.filter((p) => p.featured)
-  })
-
-  // Primary featured product
-  const primaryFeaturedProduct = computed(() => {
-    return featuredProducts.value[0] || null
-  })
-
   // Category counts for badges
   const categoryCounts = computed(() => {
     if (!products.value) return {}
 
     const counts: Record<string, number> = { all: products.value.length }
-    const categories: ProductCategoryName[] = ['Drones', 'Gimbals', 'Cameras', 'Accessories']
 
-    for (const category of categories) {
-      counts[category] = products.value.filter((p) => p.category === category).length
+    for (const p of products.value) {
+      const cat = p.category
+      const name = typeof cat === 'object' && cat && 'name' in cat ? cat.name : cat
+      if (name && typeof name === 'string') {
+        counts[name] = (counts[name] || 0) + 1
+      }
     }
 
     return counts
@@ -125,8 +126,6 @@ export function useProducts() {
   return {
     products,
     filteredProducts,
-    featuredProducts,
-    primaryFeaturedProduct,
     categoryCounts,
     filters,
     status,

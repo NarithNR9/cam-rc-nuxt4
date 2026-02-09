@@ -1,12 +1,11 @@
 import type { Category } from '~/types'
-import { mockCategories, getMockCategoryBySlug } from '~/data/mockCategories'
-import { mockProducts } from '~/data/mockProducts'
 
 /**
- * Composable for fetching categories
- * Currently uses mock data - switch to Directus when backend is ready
+ * Composable for fetching categories from Directus
  */
 export function useCategories() {
+  const { directus, readItems } = useDirectusClient()
+
   const {
     data: categories,
     status,
@@ -15,13 +14,34 @@ export function useCategories() {
   } = useAsyncData<Category[]>(
     'categories',
     async () => {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 200))
+      const cats = await directus.request(
+        readItems('categories', {
+          filter: { status: { _eq: 'published' } },
+          sort: ['sort'],
+          fields: ['*']
+        })
+      )
 
-      // Add product counts to categories
-      return mockCategories.map(cat => ({
+      // Get product counts per category
+      const products = await directus.request(
+        readItems('products', {
+          filter: { status: { _eq: 'published' } },
+          fields: ['category'],
+          limit: -1
+        })
+      )
+
+      const countMap: Record<number, number> = {}
+      for (const p of products as any[]) {
+        const catId = typeof p.category === 'object' ? p.category?.id : p.category
+        if (catId) {
+          countMap[catId] = (countMap[catId] || 0) + 1
+        }
+      }
+
+      return (cats as any[]).map(cat => ({
         ...cat,
-        product_count: mockProducts.filter(p => p.category === cat.name).length
+        product_count: countMap[cat.id] || 0
       }))
     },
     {
@@ -41,6 +61,8 @@ export function useCategories() {
  * Composable for fetching a single category by slug
  */
 export function useCategory(slug: string) {
+  const { directus, readItems } = useDirectusClient()
+
   const {
     data: category,
     status,
@@ -49,16 +71,35 @@ export function useCategory(slug: string) {
   } = useAsyncData<Category | null>(
     `category-${slug}`,
     async () => {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 200))
+      const cats = await directus.request(
+        readItems('categories', {
+          filter: {
+            slug: { _eq: slug },
+            status: { _eq: 'published' }
+          },
+          fields: ['*'],
+          limit: 1
+        })
+      )
 
-      const cat = getMockCategoryBySlug(slug)
+      const cat = (cats as any[])[0]
       if (!cat) return null
 
-      // Add product count
+      // Get product count for this category
+      const products = await directus.request(
+        readItems('products', {
+          filter: {
+            category: { _eq: cat.id },
+            status: { _eq: 'published' }
+          },
+          fields: ['id'],
+          limit: -1
+        })
+      )
+
       return {
         ...cat,
-        product_count: mockProducts.filter(p => p.category === cat.name).length
+        product_count: (products as any[]).length
       }
     },
     {
@@ -78,6 +119,8 @@ export function useCategory(slug: string) {
  * Composable for fetching products by category slug
  */
 export function useProductsByCategory(slug: string) {
+  const { directus, readItems } = useDirectusClient()
+
   const {
     data: products,
     status,
@@ -86,13 +129,16 @@ export function useProductsByCategory(slug: string) {
   } = useAsyncData(
     `products-by-category-${slug}`,
     async () => {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 300))
-
-      const category = getMockCategoryBySlug(slug)
-      if (!category) return []
-
-      return mockProducts.filter(p => p.category === category.name)
+      return await directus.request(
+        readItems('products', {
+          filter: {
+            category: { slug: { _eq: slug } },
+            status: { _eq: 'published' }
+          },
+          fields: ['*', 'category.name', 'category.slug', 'image.*'],
+          sort: ['sort']
+        })
+      )
     },
     {
       default: () => []

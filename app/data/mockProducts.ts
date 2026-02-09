@@ -2,7 +2,7 @@ import type { Product } from '~/types'
 
 export const mockProducts: Product[] = [
   {
-    id: '1',
+    id: 1,
     name: 'DJI Mavic 3 Pro',
     price: 2199,
     category: 'Drones',
@@ -20,11 +20,11 @@ export const mockProducts: Product[] = [
     image: 'https://m.media-amazon.com/images/I/619suQHw+CL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
-    featured: true,
+
     date_created: '2024-01-15T10:00:00Z'
   },
   {
-    id: '2',
+    id: 2,
     name: 'DJI Mini 4 Pro',
     price: 759,
     category: 'Drones',
@@ -40,11 +40,11 @@ export const mockProducts: Product[] = [
     image: 'https://m.media-amazon.com/images/I/61d2sc1YAQL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
-    featured: false,
+
     date_created: '2024-02-10T10:00:00Z'
   },
   {
-    id: '3',
+    id: 3,
     name: 'DJI Air 3',
     price: 1099,
     category: 'Drones',
@@ -60,11 +60,11 @@ export const mockProducts: Product[] = [
     image: 'https://www.uavoom.com/cdn/shop/files/1d3a469ea62eb9331238ba2683d39d1d_origin.jpg?v=1690428775',
     gallery: null,
     stock_status: 'low_stock',
-    featured: true,
+
     date_created: '2024-01-20T10:00:00Z'
   },
   {
-    id: '4',
+    id: 4,
     name: 'DJI RS 4 Pro',
     price: 799,
     category: 'Gimbals',
@@ -80,11 +80,11 @@ export const mockProducts: Product[] = [
     image: 'https://m.media-amazon.com/images/I/61rhwQDa2nL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
-    featured: false,
+
     date_created: '2024-03-01T10:00:00Z'
   },
   {
-    id: '5',
+    id: 5,
     name: 'DJI Ronin 4D-8K',
     price: 7199,
     category: 'Cameras',
@@ -100,11 +100,11 @@ export const mockProducts: Product[] = [
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8g2yClzf3-tM_zEWBCSrO9N_j6Y3Rx0ouQ&s',
     gallery: null,
     stock_status: 'pre_order',
-    featured: false,
+
     date_created: '2024-02-25T10:00:00Z'
   },
   {
-    id: '6',
+    id: 6,
     name: 'DJI Osmo Pocket 3',
     price: 519,
     category: 'Cameras',
@@ -120,11 +120,11 @@ export const mockProducts: Product[] = [
     image: 'https://tiendadedrones.com.ar/wp-content/uploads/2024/08/1000x1000-RCDJI059-1.jpg.webp',
     gallery: null,
     stock_status: 'in_stock',
-    featured: true,
+
     date_created: '2024-03-05T10:00:00Z'
   },
   {
-    id: '7',
+    id: 7,
     name: 'DJI RS 3 Mini',
     price: 299,
     category: 'Gimbals',
@@ -139,11 +139,11 @@ export const mockProducts: Product[] = [
     image: 'https://djiindiashop.com/cdn/shop/files/4_4c9a45d5-2c47-4c98-9252-445373254cc1.jpg?v=1725863412&width=2560',
     gallery: null,
     stock_status: 'in_stock',
-    featured: false,
+
     date_created: '2024-01-30T10:00:00Z'
   },
   {
-    id: '8',
+    id: 8,
     name: 'DJI Avata 2',
     price: 999,
     category: 'Drones',
@@ -159,11 +159,11 @@ export const mockProducts: Product[] = [
     image: 'https://m.media-amazon.com/images/I/71hc7wNXBZL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
-    featured: false,
+
     date_created: '2024-02-15T10:00:00Z'
   },
   {
-    id: '9',
+    id: 9,
     name: 'DJI Mic 2',
     price: 349,
     category: 'Accessories',
@@ -178,11 +178,11 @@ export const mockProducts: Product[] = [
     image: 'https://m.media-amazon.com/images/I/61h78MEXojL._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'in_stock',
-    featured: false,
+
     date_created: '2024-03-10T10:00:00Z'
   },
   {
-    id: '10',
+    id: 10,
     name: 'DJI Power 1000',
     price: 999,
     category: 'Accessories',
@@ -198,11 +198,11 @@ export const mockProducts: Product[] = [
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_moFwEHf-m8nhNGEQnEkM3GYzVDk08sAJLg&s',
     gallery: null,
     stock_status: 'out_of_stock',
-    featured: false,
+
     date_created: '2024-02-20T10:00:00Z'
   },
   {
-    id: '11',
+    id: 11,
     name: 'DJI Action 4',
     price: 399,
     category: 'Cameras',
@@ -218,11 +218,11 @@ export const mockProducts: Product[] = [
     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNGrfkxPEkDZmsCT95gx1hQ4o7s9sPlOMOpA&s',
     gallery: null,
     stock_status: 'in_stock',
-    featured: false,
+
     date_created: '2024-01-25T10:00:00Z'
   },
   {
-    id: '12',
+    id: 12,
     name: 'DJI FPV Goggles 3',
     price: 499,
     category: 'Accessories',
@@ -238,12 +238,12 @@ export const mockProducts: Product[] = [
     image: 'https://m.media-amazon.com/images/I/6184JUNS83L._AC_UF894,1000_QL80_.jpg',
     gallery: null,
     stock_status: 'low_stock',
-    featured: false,
+
     date_created: '2024-02-05T10:00:00Z'
   }
 ]
 
 // Helper to get a mock product by ID
 export function getMockProductById(id: string | number): Product | null {
-  return mockProducts.find(p => p.id === String(id)) || null
+  return mockProducts.find(p => p.id === Number(id)) || null
 }

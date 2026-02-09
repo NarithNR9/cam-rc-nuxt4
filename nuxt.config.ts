@@ -58,8 +58,8 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  routeRules: {
-    '/': { swr: 3600 },
-    '/products/**': { isr: 86400 }
-  }
+  // routeRules: {
+  //   '/': { swr: 3600 },
+  //   '/products/**': { isr: 86400 }
+  // }
 })

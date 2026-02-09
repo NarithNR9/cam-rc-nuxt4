@@ -1,13 +1,14 @@
 import type { Product, ProductSpec } from '~/types'
-import { getMockProductById } from '~/data/mockProducts'
 import { getFileId } from '~/composables/useDirectus'
 
 /**
- * Composable for fetching a single product by ID
- * Currently uses mock data - switch to Directus when backend is ready
+ * Composable for fetching a single product by ID from Directus
  */
 export function useProduct(id: string | number) {
-  // Use mock data instead of Directus fetch
+  const { directus, readItem } = useDirectusClient()
+  const { getAssetUrl } = useDirectusAsset()
+  const numericId = typeof id === 'string' ? Number(id) : id
+
   const {
     data: product,
     status,
@@ -16,26 +17,22 @@ export function useProduct(id: string | number) {
   } = useAsyncData<Product | null>(
     `product-${id}`,
     async () => {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 200))
-      return getMockProductById(id)
+      const item = await directus.request(
+        readItem('products', numericId, {
+          fields: ['*', 'category.*', 'image.*']
+        })
+      )
+      return item as Product | null
     },
     {
       default: () => null
     }
   )
 
-  // Primary image URL or ID
+  // Primary image ID
   const primaryImageId = computed(() => {
     if (!product.value) return null
-    const img = product.value.image
-    if (!img) return null
-    // If it's already a full URL, return as-is
-    if (typeof img === 'string' && (img.startsWith('http') || img.startsWith('/'))) {
-      return img
-    }
-    // Otherwise use getFileId for Directus file objects
-    return getFileId(img as string | { id: string } | null)
+    return getFileId(product.value.image as string | { id: string } | null)
   })
 
   // Gallery image IDs
@@ -53,14 +50,14 @@ export function useProduct(id: string | number) {
       .filter((id): id is string => id !== null)
   })
 
-  // All images (primary + gallery)
+  // All images as full asset URLs (primary + gallery)
   const allImageIds = computed<string[]>(() => {
-    const images: string[] = []
+    const ids: string[] = []
     if (primaryImageId.value) {
-      images.push(primaryImageId.value)
+      ids.push(primaryImageId.value)
     }
-    images.push(...galleryImageIds.value)
-    return images
+    ids.push(...galleryImageIds.value)
+    return ids.map(id => getAssetUrl(id))
   })
 
   // Group specs by category

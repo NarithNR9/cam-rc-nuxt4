@@ -72,19 +72,45 @@
 </template>
 
 <script setup lang="ts">
+import { readItems } from '@directus/sdk'
+
 interface HeroSlide {
   id: number
   image: string
 }
 
-// Mock slides - will be replaced with API data later
-const slides: HeroSlide[] = [
+const fallbackSlides: HeroSlide[] = [
   { id: 1, image: '/heros/hero-1.jpg' },
   { id: 2, image: '/heros/hero-2.png' },
   { id: 3, image: '/heros/hero-3.jpg' }
 ]
 
 const config = useRuntimeConfig()
+const directus = useDirectus()
+const { getAssetUrl } = useDirectusAsset()
+
+const { data: apiSlides } = await useAsyncData('hero-slides', async () => {
+  try {
+    const items = await directus.request(
+      readItems('hero_slides', {
+        filter: { status: { _eq: 'published' } },
+        sort: ['sort'],
+        fields: ['*', 'image.*']
+      })
+    )
+    return (items as any[]).map(item => ({
+      id: item.id,
+      image: item.image ? getAssetUrl(typeof item.image === 'object' ? item.image.id : item.image) : ''
+    })).filter(s => s.image)
+  } catch {
+    return []
+  }
+})
+
+const slides = computed<HeroSlide[]>(() => {
+  return apiSlides.value && apiSlides.value.length > 0 ? apiSlides.value : fallbackSlides
+})
+
 const currentSlide = ref(0)
 const contentVisible = ref(true)
 
@@ -104,11 +130,11 @@ const goToSlide = (index: number) => {
 }
 
 const nextSlide = () => {
-  goToSlide((currentSlide.value + 1) % slides.length)
+  goToSlide((currentSlide.value + 1) % slides.value.length)
 }
 
 const prevSlide = () => {
-  goToSlide((currentSlide.value - 1 + slides.length) % slides.length)
+  goToSlide((currentSlide.value - 1 + slides.value.length) % slides.value.length)
 }
 
 // Auto-advance slides

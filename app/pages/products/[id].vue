@@ -94,7 +94,7 @@ import { formatPrice, getStockStatusConfig } from '~/composables/useDirectus'
 
 const localePath = useLocalePath()
 const route = useRoute()
-const productId = route.params.id as string
+const productId = Number(route.params.id)
 
 const {
   product,

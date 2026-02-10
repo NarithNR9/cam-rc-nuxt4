@@ -6,7 +6,7 @@
       class="inline-flex items-center gap-2 text-slate-500 hover:text-red-600 mb-8 transition-colors"
     >
       <Icon name="heroicons:arrow-left" class="w-5 h-5" />
-      <span>Back to Products</span>
+      <span>{{ $t('common.backTo') }} {{ $t('common.products') }}</span>
     </NuxtLink>
 
     <!-- Loading State -->
@@ -24,10 +24,10 @@
     <!-- Not Found State -->
     <div v-else-if="!product" class="text-center py-16">
       <Icon name="heroicons:exclamation-triangle" class="w-16 h-16 text-red-500 mx-auto mb-4" />
-      <h2 class="text-2xl font-bold text-slate-800 mb-2">Product Not Found</h2>
-      <p class="text-slate-500 mb-6">The product you're looking for doesn't exist or has been removed.</p>
+      <h2 class="text-2xl font-bold text-slate-800 mb-2">{{ $t('products.productNotFound') }}</h2>
+      <p class="text-slate-500 mb-6">{{ $t('products.productNotFoundDesc') }}</p>
       <NuxtLink :to="localePath('/')" class="btn-accent">
-        Browse All Products
+        {{ $t('products.browseAll') }}
       </NuxtLink>
     </div>
 
@@ -35,7 +35,7 @@
     <div v-else class="grid lg:grid-cols-2 gap-8 lg:gap-12">
       <!-- Image Gallery -->
       <div>
-        <UiImageGallery :images="allImageIds" :alt="product.name" />
+        <UiImageGallery :images="allImageIds" :alt="product.name" :youtube-url="youtubeEmbedUrl" />
       </div>
 
       <!-- Product Info -->
@@ -59,9 +59,16 @@
         </h1>
 
         <!-- Price -->
-        <p class="price-tag-lg">
-          {{ formattedPrice }}
-        </p>
+        <div class="price-tag-lg">
+          <template v-if="discountPercent">
+            <span class="inline-block bg-red-600 text-white text-sm font-bold px-2 py-1 rounded mr-3">-{{ discountPercent }}%</span>
+            <span class="line-through text-slate-400 text-xl mr-3">{{ formattedOriginalPrice }}</span>
+            <span class="text-red-600">{{ formattedPrice }}</span>
+          </template>
+          <template v-else>
+            {{ formattedPrice }}
+          </template>
+        </div>
 
         <!-- Description -->
         <div class="prose prose-slate max-w-none">
@@ -78,7 +85,7 @@
 
         <!-- Specifications -->
         <div v-if="Object.keys(groupedSpecs).length > 0" class="pt-6 border-t border-slate-200">
-          <h3 class="text-lg font-semibold text-slate-800 mb-4">Specifications</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-4">{{ $t('products.specifications') }}</h3>
           <UiSpecsList
             :grouped-specs="groupedSpecs"
             :get-icon="getSpecGroupIcon"
@@ -100,13 +107,28 @@ const {
   product,
   status,
   allImageIds,
+  youtubeEmbedUrl,
   groupedSpecs,
   getSpecGroupIcon
 } = useProduct(productId)
 
 const { getOgImageUrl } = useDirectusAsset()
 
-const formattedPrice = computed(() =>
+const hasDiscount = computed(() =>
+  product.value?.discounted_price != null && product.value.discounted_price < product.value.price
+)
+
+const discountPercent = computed(() => {
+  if (!hasDiscount.value || !product.value) return null
+  return Math.round((1 - product.value.discounted_price! / product.value.price) * 100)
+})
+
+const formattedPrice = computed(() => {
+  if (!product.value) return ''
+  return hasDiscount.value ? formatPrice(product.value.discounted_price!) : formatPrice(product.value.price)
+})
+
+const formattedOriginalPrice = computed(() =>
   product.value ? formatPrice(product.value.price) : ''
 )
 

@@ -19,7 +19,7 @@ export function useProduct(id: string | number) {
     async () => {
       const item = await directus.request(
         readItem('products', numericId, {
-          fields: ['*', 'category.*', 'image.*']
+          fields: ['*', 'category.*', 'image.*', 'gallery.directus_files_id.*']
         })
       )
       return item as Product | null
@@ -95,6 +95,17 @@ export function useProduct(id: string | number) {
     return specGroupIcons[group] || 'heroicons:tag'
   }
 
+  // YouTube embed URL
+  const youtubeEmbedUrl = computed((): string | null => {
+    const url = product.value?.youtube_url
+    if (!url) return null
+    const watchMatch = url.match(/[?&]v=([^&]+)/)
+    if (watchMatch?.[1]) return `https://www.youtube.com/embed/${watchMatch[1]}`
+    const shortMatch = url.match(/youtu\.be\/([^?&]+)/)
+    if (shortMatch?.[1]) return `https://www.youtube.com/embed/${shortMatch[1]}`
+    return null
+  })
+
   return {
     product,
     status,
@@ -103,6 +114,7 @@ export function useProduct(id: string | number) {
     primaryImageId,
     galleryImageIds,
     allImageIds,
+    youtubeEmbedUrl,
     groupedSpecs,
     getSpecGroupIcon
   }

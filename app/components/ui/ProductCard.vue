@@ -23,6 +23,9 @@
         <span :class="['badge', stockConfig.bgColor]">
           {{ stockConfig.label }}
         </span>
+        <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
+          -{{ discountPercent }}%
+        </span>
       </div>
       <div class="absolute top-3 right-3">
         <span class="badge badge-category">
@@ -37,7 +40,13 @@
         {{ product.name }}
       </h3>
       <p class="price-tag">
-        {{ formattedPrice }}
+        <template v-if="discountPercent">
+          <span class="line-through text-slate-400 text-sm mr-2">{{ formattedOriginalPrice }}</span>
+          <span class="text-red-600">{{ formattedPrice }}</span>
+        </template>
+        <template v-else>
+          {{ formattedPrice }}
+        </template>
       </p>
     </div>
   </NuxtLink>
@@ -53,7 +62,20 @@ const props = defineProps<{
   product: Product
 }>()
 
-const formattedPrice = computed(() => formatPrice(props.product.price))
+const hasDiscount = computed(() =>
+  props.product.discounted_price != null && props.product.discounted_price < props.product.price
+)
+
+const discountPercent = computed(() => {
+  if (!hasDiscount.value) return null
+  return Math.round((1 - props.product.discounted_price! / props.product.price) * 100)
+})
+
+const formattedPrice = computed(() =>
+  hasDiscount.value ? formatPrice(props.product.discounted_price!) : formatPrice(props.product.price)
+)
+
+const formattedOriginalPrice = computed(() => formatPrice(props.product.price))
 
 const stockConfig = computed(() => getStockStatusConfig(props.product.stock_status))
 

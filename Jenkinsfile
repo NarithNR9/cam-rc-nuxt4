@@ -11,10 +11,13 @@ pipeline {
                 checkout scm
             }
         }
-        stage('📦 Install') {
+        stage('📦 Install & Config') {
             steps {
-                echo 'Installing with Yarn...'
-                // Ensure Yarn is using the lockfile strictly
+                echo 'Preparing environment...'
+                // Copy the persistent secret file into the current workspace
+                sh 'cp /var/lib/jenkins/secrets/cam-rc.env .env'
+        
+                echo 'Installing dependencies with Yarn...'
                 sh 'yarn install --immutable'
             }
         }

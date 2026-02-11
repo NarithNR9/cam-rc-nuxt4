@@ -34,12 +34,14 @@ export interface Product {
   id: number
   name: string
   price: number
+  discounted_price?: number
   category: ProductCategoryName | string | Category
   category_id?: string
   description: string
   specs: ProductSpec[]
   image: string | DirectusFile | null
   gallery: Array<{ directus_files_id: string | DirectusFile }> | null
+  youtube_url?: string
   stock_status: StockStatus
   date_created?: string
   date_updated?: string

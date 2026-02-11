@@ -57,7 +57,7 @@ const currentLocaleName = computed(() => {
 })
 
 const switchLocale = async (code: string) => {
-  await setLocale(code as 'en' | 'km')
+  await setLocale(code as 'en' | 'km' | 'zh')
   isOpen.value = false
 }
 

@@ -25,7 +25,7 @@ export function useProducts() {
       const items = await directus.request(
         readItems('products', {
           filter: { status: { _eq: 'published' } },
-          fields: ['*', 'category.id', 'category.name', 'category.slug', 'image.*'],
+          fields: ['*', 'category.id', 'category.name', 'category.slug', 'image.*', 'discounted_price'],
           sort: ['sort'],
           limit: -1
         })

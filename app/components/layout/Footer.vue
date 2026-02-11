@@ -103,10 +103,18 @@
       </div>
 
       <!-- Copyright -->
-      <div class="mt-12 pt-8 border-t border-slate-200 text-center">
+      <div class="mt-9 pt-6 border-t border-slate-200 text-center">
         <p class="text-slate-400 text-sm">
           {{ $t('footer.copyright', { year: currentYear }) }}
         </p>
+        <a
+          href="https://github.com/NarithNR9"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-slate-400 hover:text-slate-600 text-xs transition-colors mt-2 inline-block"
+        >
+          Developed by Sonarith Seng — Fullstack Developer
+        </a>
       </div>
     </div>
   </footer>

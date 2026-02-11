@@ -1,66 +1,34 @@
 pipeline {
     agent any
-
     tools {
-        // This must match the name you gave in Global Tool Configuration
         nodejs "NodeJS_24"
     }
-
-    environment {
-        // Path to your ecosystem file if it's not in the root
-        ECOSYSTEM_FILE = "ecosystem.config.cjs"
-    }
-
     stages {
-        stage('🚚 Clone & Clean') {
+        stage('🚀 Pull Code') {
             steps {
-                // Pulls the latest code from your repo
                 checkout scm
-                echo "Deploying to Contabo VPS with Node 24..."
             }
         }
-
         stage('📦 Install Dependencies') {
             steps {
-                echo 'Installing npm packages...'
-                // 'npm ci' is preferred for CI/CD as it's faster and more reliable
-                sh 'npm ci'
+                echo 'Installing dependencies with Yarn...'
+                // If using Yarn 1 (Classic): yarn install --frozen-lockfile
+                // If using Yarn 2+ (Berry): yarn install --immutable
+                sh 'yarn install --immutable' 
             }
         }
-
-        stage('🏗️ Build Nuxt Project') {
+        stage('🏗️ Build') {
             steps {
-                echo 'Generating Nuxt production build...'
-                // This creates the .output/ directory
-                sh 'npm run build'
+                echo 'Building Nuxt 4 project...'
+                sh 'yarn build'
             }
         }
-
-        stage('🚀 Deploy with PM2') {
-            // Only trigger this stage for the main branch
-            when {
-                branch 'main'
-            }
+        stage('✅ Deploy') {
             steps {
-                echo 'Starting/Restarting application via ecosystem file...'
-                script {
-                    // startOrRestart handles both the first-time start and subsequent updates
-                    // It uses the configuration already defined in your ecosystem.config.cjs
-                    sh "pm2 startOrRestart ${ECOSYSTEM_FILE} --env production"
-
-                    // Save the process list so it persists after a VPS reboot
-                    sh "pm2 save"
-                }
+                echo 'Restarting PM2...'
+                sh "pm2 startOrRestart ecosystem.config.cjs --env production"
+                sh "pm2 save"
             }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Deployment successful!'
-        }
-        failure {
-            echo '❌ Deployment failed. Please check the logs above.'
         }
     }
 }

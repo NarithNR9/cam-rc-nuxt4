@@ -4,29 +4,34 @@ pipeline {
         nodejs "NodeJS_24"
     }
     stages {
-        stage('🚀 Pull Code') {
+        stage('🧹 Clean & Pull') {
             steps {
+                // Force a clean state by removing the old build folder
+                sh 'rm -rf .output .nuxt'
                 checkout scm
             }
         }
-        stage('📦 Install Dependencies') {
+        stage('📦 Install') {
             steps {
-                echo 'Installing dependencies with Yarn...'
-                // If using Yarn 1 (Classic): yarn install --frozen-lockfile
-                // If using Yarn 2+ (Berry): yarn install --immutable
-                sh 'yarn install --immutable' 
+                echo 'Installing with Yarn...'
+                // Ensure Yarn is using the lockfile strictly
+                sh 'yarn install --immutable'
             }
         }
         stage('🏗️ Build') {
             steps {
-                echo 'Building Nuxt 4 project...'
+                echo 'Building Nuxt 4...'
                 sh 'yarn build'
+                // Verification: Log the date of the new build folder to Jenkins console
+                sh 'ls -ld .output'
             }
         }
         stage('✅ Deploy') {
             steps {
                 echo 'Restarting PM2...'
-                sh "pm2 startOrRestart ecosystem.config.cjs --env production"
+                // Use delete/start for a "hard" refresh if startOrRestart feels stuck
+                sh "pm2 delete cam-rc-nuxt || true"
+                sh "pm2 start ecosystem.config.cjs --env production"
                 sh "pm2 save"
             }
         }

@@ -8,7 +8,16 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-            link: [
+      script: [
+        {
+          src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'}`,
+          async: true
+        },
+        {
+          innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'}');`
+        }
+      ],
+      link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
@@ -30,7 +39,8 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       { code: 'en', language: 'en-US', name: 'EN', file: 'en.json' },
-      { code: 'km', language: 'km-KH', name: 'ខ្មែរ', file: 'km.json' }
+      { code: 'km', language: 'km-KH', name: 'ខ្មែរ', file: 'km.json' },
+      { code: 'zh', language: 'zh-CN', name: '中文', file: 'zh.json' }
     ],
     defaultLocale: 'en',
     langDir: 'locales',
@@ -44,6 +54,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      gaMeasurementId: process.env.GA_MEASUREMENT_ID || '',
       directusUrl: process.env.DIRECTUS_URL || 'https://your-directus-api.com',
       telegramUsername: process.env.TELEGRAM_USERNAME || 'cambodiarc',
       phoneNumber: process.env.PHONE_NUMBER || '+855 12 345 678'

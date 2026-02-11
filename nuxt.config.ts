@@ -53,6 +53,8 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    directusUrl: process.env.DIRECTUS_URL || 'https://your-directus-api.com',
+    directusAdminToken: process.env.DIRECTUS_ADMIN_TOKEN || '',
     public: {
       gaMeasurementId: process.env.GA_MEASUREMENT_ID || '',
       directusUrl: process.env.DIRECTUS_URL || 'https://your-directus-api.com',

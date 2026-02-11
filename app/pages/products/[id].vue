@@ -114,6 +114,11 @@ const {
 
 const { getOgImageUrl } = useDirectusAsset()
 
+// Track product view
+onMounted(() => {
+  $fetch(`/api/products/${productId}/view`, { method: 'POST' }).catch(() => {})
+})
+
 const hasDiscount = computed(() =>
   product.value?.discounted_price != null && product.value.discounted_price < product.value.price
 )

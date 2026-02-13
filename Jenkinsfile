@@ -32,10 +32,19 @@ pipeline {
         stage('✅ Deploy') {
             steps {
                 echo 'Restarting PM2...'
-                // Use delete/start for a "hard" refresh if startOrRestart feels stuck
-                sh "pm2 delete cam-rc-nuxt || true"
-                sh "pm2 start ecosystem.config.cjs --env production"
-                sh "pm2 save"
+                // Using triple single-quotes (''') for multi-line shell commands
+                sh '''
+                    # 1. Stop Jenkins from killing this process after the job ends
+                    export JENKINS_NODE_COOKIE=dontKillMe
+                    
+                    # 2. Tell PM2 exactly where the config is
+                    export PM2_HOME=/var/lib/jenkins/.pm2
+                    
+                    # 3. Restart the application
+                    pm2 delete cam-rc-nuxt || true
+                    pm2 start ecosystem.config.cjs --env production
+                    pm2 save
+                '''
             }
         }
     }

@@ -32,7 +32,8 @@
     "productNotFound": "រកមិនឃើញផលិតផល",
     "productNotFoundDesc": "ផលិតផលដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានដកចេញ។",
     "browseAll": "រុករកផលិតផលទាំងអស់",
-    "specifications": "ព័ត៌មានលម្អិត"
+    "specifications": "ព័ត៌មានលម្អិត",
+    "inboxForPrice": "សួរតម្លៃតាម Inbox"
   },
   "categories": {
     "title": "ប្រភេទផលិតផល",

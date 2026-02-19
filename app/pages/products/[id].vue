@@ -59,7 +59,11 @@
         </h1>
 
         <!-- Price -->
-        <div class="price-tag-lg">
+        <div v-if="isContactForPrice" class="flex items-center gap-2 text-base font-semibold text-red-600 border border-red-200 rounded-lg px-3 py-2 w-fit">
+          <Icon name="heroicons:currency-dollar" class="w-6 h-6 shrink-0" />
+          <span>{{ $t('products.inboxForPrice') }}</span>
+        </div>
+        <div v-else class="price-tag-lg">
           <template v-if="discountPercent">
             <span class="inline-block bg-red-600 text-white text-sm font-bold px-2 py-1 rounded mr-3">-{{ discountPercent }}%</span>
             <span class="line-through text-slate-400 text-xl mr-3">{{ formattedOriginalPrice }}</span>
@@ -119,7 +123,10 @@ onMounted(() => {
   $fetch(`/api/products/${productId}/view`, { method: 'POST' }).catch(() => {})
 })
 
+const isContactForPrice = computed(() => !product.value?.price || product.value.price === 0)
+
 const hasDiscount = computed(() =>
+  !isContactForPrice.value &&
   product.value?.discounted_price != null && product.value.discounted_price < product.value.price
 )
 

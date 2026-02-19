@@ -70,7 +70,7 @@ const isContactForPrice = computed(() => !props.product.price || props.product.p
 
 const hasDiscount = computed(() =>
   !isContactForPrice.value &&
-  props.product.discounted_price != null && props.product.discounted_price < props.product.price
+  props.product.discounted_price != null && props.product.discounted_price < props.product.price && props.product.discounted_price > 0
 )
 
 const discountPercent = computed(() => {

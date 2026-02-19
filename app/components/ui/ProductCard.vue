@@ -39,7 +39,11 @@
       <h3 class="font-semibold text-slate-800 line-clamp-2 mb-2 min-h-[3rem]">
         {{ product.name }}
       </h3>
-      <p class="price-tag">
+      <div v-if="isContactForPrice" class="flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit">
+        <Icon name="heroicons:currency-dollar" class="w-6 h-6 shrink-0" />
+        <span>{{ $t('products.inboxForPrice') }}</span>
+      </div>
+      <p v-else class="price-tag">
         <template v-if="discountPercent">
           <span class="line-through text-slate-400 text-sm mr-2">{{ formattedOriginalPrice }}</span>
           <span class="text-red-600">{{ formattedPrice }}</span>
@@ -62,7 +66,10 @@ const props = defineProps<{
   product: Product
 }>()
 
+const isContactForPrice = computed(() => !props.product.price || props.product.price === 0)
+
 const hasDiscount = computed(() =>
+  !isContactForPrice.value &&
   props.product.discounted_price != null && props.product.discounted_price < props.product.price
 )
 

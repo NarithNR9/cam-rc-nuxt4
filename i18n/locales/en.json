@@ -32,7 +32,8 @@
     "productNotFound": "Product Not Found",
     "productNotFoundDesc": "The product you're looking for doesn't exist or has been removed.",
     "browseAll": "Browse All Products",
-    "specifications": "Specifications"
+    "specifications": "Specifications",
+    "inboxForPrice": "Inbox for Price"
   },
   "categories": {
     "title": "Product Categories",

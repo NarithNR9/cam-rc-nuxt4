@@ -29,6 +29,7 @@
           <UiCategoryFilter
             v-model="filters.category"
             :counts="categoryCounts"
+            :options="categoryOptions"
           />
         </div>
 
@@ -96,6 +97,7 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
+const { categories } = useCategories()
 
 const {
   filteredProducts,
@@ -107,6 +109,15 @@ const {
   clearFilters,
   hasActiveFilters
 } = useProducts()
+
+const categoryOptions = computed(() => {
+  const dynamicCategories = categories.value.map(category => ({
+    value: category.name,
+    label: category.name
+  }))
+
+  return [{ value: 'all', label: t('common.all') }, ...dynamicCategories]
+})
 
 // Static SEO for homepage
 useSeoMeta({

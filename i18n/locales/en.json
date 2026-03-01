@@ -33,7 +33,8 @@
     "productNotFoundDesc": "The product you're looking for doesn't exist or has been removed.",
     "browseAll": "Browse All Products",
     "specifications": "Specifications",
-    "inboxForPrice": "Inbox for Price"
+    "inboxForPrice": "Inbox for Price",
+    "askPriceMessage": "Hello! How much is {product}?"
   },
   "categories": {
     "title": "Product Categories",

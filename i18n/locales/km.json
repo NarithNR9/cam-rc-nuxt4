@@ -33,7 +33,8 @@
     "productNotFoundDesc": "ផលិតផលដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានដកចេញ។",
     "browseAll": "រុករកផលិតផលទាំងអស់",
     "specifications": "ព័ត៌មានលម្អិត",
-    "inboxForPrice": "សួរតម្លៃតាម Inbox"
+    "inboxForPrice": "សួរតម្លៃតាម Inbox",
+    "askPriceMessage": "សួស្តី! តើ {product} តម្លៃប៉ុន្មាន?"
   },
   "categories": {
     "title": "ប្រភេទផលិតផល",

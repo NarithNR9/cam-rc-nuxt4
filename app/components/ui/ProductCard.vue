@@ -39,10 +39,10 @@
       <h3 class="font-semibold text-slate-800 line-clamp-2 mb-2 min-h-[3rem]">
         {{ product.name }}
       </h3>
-      <div v-if="isContactForPrice" class="flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit">
+      <a v-if="isContactForPrice" :href="inboxForPriceUrl" target="_blank" rel="noopener noreferrer" @click.stop class="flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit hover:bg-red-50 transition-colors">
         <Icon name="heroicons:currency-dollar" class="w-6 h-6 shrink-0" />
         <span>{{ $t('products.inboxForPrice') }}</span>
-      </div>
+      </a>
       <p v-else class="price-tag">
         <template v-if="discountPercent">
           <span class="line-through text-slate-400 text-sm mr-2">{{ formattedOriginalPrice }}</span>
@@ -61,12 +61,20 @@ import type { Product } from '~/types'
 import { formatPrice, getStockStatusConfig } from '~/composables/useDirectus'
 
 const localePath = useLocalePath()
+const config = useRuntimeConfig()
+const { t } = useI18n()
 
 const props = defineProps<{
   product: Product
 }>()
 
 const isContactForPrice = computed(() => !props.product.price || props.product.price === 0)
+
+const inboxForPriceUrl = computed(() => {
+  const username = config.public.telegramUsername
+  const message = t('products.askPriceMessage', { product: props.product.name })
+  return `https://t.me/${username}?text=${encodeURIComponent(message)}`
+})
 
 const hasDiscount = computed(() =>
   !isContactForPrice.value &&

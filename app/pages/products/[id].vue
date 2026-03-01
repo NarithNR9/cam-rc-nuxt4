@@ -59,10 +59,10 @@
         </h1>
 
         <!-- Price -->
-        <div v-if="isContactForPrice" class="flex items-center gap-2 text-base font-semibold text-red-600 border border-red-200 rounded-lg px-3 py-2 w-fit">
+        <a v-if="isContactForPrice" :href="inboxForPriceUrl" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-base font-semibold text-red-600 border border-red-200 rounded-lg px-3 py-2 w-fit hover:bg-red-50 transition-colors cursor-pointer">
           <Icon name="heroicons:currency-dollar" class="w-6 h-6 shrink-0" />
           <span>{{ $t('products.inboxForPrice') }}</span>
-        </div>
+        </a>
         <div v-else class="price-tag-lg">
           <template v-if="discountPercent">
             <span class="inline-block bg-red-600 text-white text-sm font-bold px-2 py-1 rounded mr-3">-{{ discountPercent }}%</span>
@@ -123,7 +123,17 @@ onMounted(() => {
   $fetch(`/api/products/${productId}/view`, { method: 'POST' }).catch(() => {})
 })
 
+const config = useRuntimeConfig()
+const { t } = useI18n()
+
 const isContactForPrice = computed(() => !product.value?.price || product.value.price === 0)
+
+const inboxForPriceUrl = computed(() => {
+  const username = config.public.telegramUsername
+  const name = product.value?.name || 'this product'
+  const message = t('products.askPriceMessage', { product: name })
+  return `https://t.me/${username}?text=${encodeURIComponent(message)}`
+})
 
 const hasDiscount = computed(() =>
   !isContactForPrice.value &&

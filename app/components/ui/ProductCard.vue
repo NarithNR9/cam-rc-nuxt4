@@ -19,7 +19,7 @@
       </div>
 
       <!-- Badges -->
-      <div class="absolute top-3 left-3 flex flex-col gap-2">
+      <div class="hidden md:flex md:absolute top-3 left-3 flex-col gap-2">
         <span :class="['badge', stockConfig.bgColor]">
           {{ stockConfig.label }}
         </span>
@@ -27,7 +27,12 @@
           -{{ discountPercent }}%
         </span>
       </div>
-      <div class="absolute top-3 right-3">
+      <div class="absolute md:hidden top-3 left-3">
+          <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
+            -{{ discountPercent }}%
+          </span>
+      </div>
+      <div class="hidden md:flex md:absolute top-3 right-3">
         <span class="badge badge-category">
           {{ categoryName }}
         </span>

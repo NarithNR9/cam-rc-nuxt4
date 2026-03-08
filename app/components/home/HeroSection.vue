@@ -1,5 +1,5 @@
 <template>
-  <section class="relative h-[40vh] md:h-[70vh] md:min-h-[400px] max-h-[600px] overflow-hidden">
+  <section class="relative h-[20vh] md:h-[70vh] md:min-h-[400px] max-h-[600px] overflow-hidden">
     <!-- Slides -->
     <div class="absolute inset-0">
       <TransitionGroup name="fade">
@@ -23,7 +23,7 @@
     <!-- Minimal Content - Bottom Left -->
     <div class="container-app relative z-10 h-full flex items-end max-md:justify-center pb-6 md:pb-12">
       <TransitionGroup name="slide-up">
-        <div v-show="contentVisible" :key="currentSlide" class="flex items-center gap-3 md:gap-6">
+        <div v-show="contentVisible" :key="currentSlide" class="hidden md:flex items-center gap-3 md:gap-6">
           <a href="#products" class="btn-accent max-md:!px-3 max-md:!py-2">
             <Icon name="heroicons:shopping-bag" class="w-5 h-5" />
             <span class="text-xs md:text-base">{{ $t('common.browseProducts') }}</span>

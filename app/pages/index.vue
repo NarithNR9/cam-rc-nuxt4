@@ -4,7 +4,7 @@
     <HomeHeroSection />
 
     <!-- Products Section -->
-    <section id="products" class="container-app py-16">
+    <section id="products" class="container-app py-9 md:py-16">
       <!-- Section Header -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>

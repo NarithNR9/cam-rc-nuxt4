@@ -1,50 +1,63 @@
 <template>
-  <NuxtLink :to="localePath(`/products/${product.id}`)" class="product-card block">
-    <!-- Image -->
-    <div class="product-card-image">
-      <!-- Show actual image if URL exists -->
-      <img
-        v-if="imageUrl"
-        :src="imageUrl"
-        :alt="product.name"
-        class="w-full h-full object-cover"
-        loading="lazy"
-      />
-      <!-- Fallback placeholder -->
-      <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-        <div class="text-center">
-          <Icon :name="categoryIcon" class="w-16 h-16 text-slate-400 mb-2" />
-          <span class="text-xs text-slate-500">{{ categoryName }}</span>
+  <article class="product-card block">
+    <NuxtLink :to="localePath(`/products/${product.id}`)" class="block">
+      <!-- Image -->
+      <div class="product-card-image">
+        <!-- Show actual image if URL exists -->
+        <img
+          v-if="imageUrl"
+          :src="imageUrl"
+          :alt="product.name"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <!-- Fallback placeholder -->
+        <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+          <div class="text-center">
+            <Icon :name="categoryIcon" class="w-16 h-16 text-slate-400 mb-2" />
+            <span class="text-xs text-slate-500">{{ categoryName }}</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Badges -->
-      <div class="hidden md:flex md:absolute top-3 left-3 flex-col gap-2">
-        <span :class="['badge', stockConfig.bgColor]">
-          {{ stockConfig.label }}
-        </span>
-        <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
-          -{{ discountPercent }}%
-        </span>
-      </div>
-      <div class="absolute md:hidden top-3 left-3">
+        <!-- Badges -->
+        <div class="hidden md:flex md:absolute top-3 left-3 flex-col gap-2">
+          <span :class="['badge', stockConfig.bgColor]">
+            {{ stockConfig.label }}
+          </span>
           <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
             -{{ discountPercent }}%
           </span>
+        </div>
+        <div class="absolute md:hidden top-3 left-3">
+          <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
+            -{{ discountPercent }}%
+          </span>
+        </div>
+        <div class="hidden md:flex md:absolute top-3 right-3">
+          <span class="badge badge-category">
+            {{ categoryName }}
+          </span>
+        </div>
       </div>
-      <div class="hidden md:flex md:absolute top-3 right-3">
-        <span class="badge badge-category">
-          {{ categoryName }}
-        </span>
-      </div>
-    </div>
+    </NuxtLink>
 
     <!-- Info -->
     <div class="p-4">
       <h3 class="font-semibold text-slate-800 line-clamp-2 mb-2 min-h-[3rem]">
-        {{ product.name }}
+        <NuxtLink
+          :to="localePath(`/products/${product.id}`)"
+          class="hover:text-red-600 transition-colors"
+        >
+          {{ product.name }}
+        </NuxtLink>
       </h3>
-      <a v-if="isContactForPrice" :href="inboxForPriceUrl" target="_blank" rel="noopener noreferrer" @click.stop class="flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit hover:bg-red-50 transition-colors">
+      <a
+        v-if="isContactForPrice"
+        :href="inboxForPriceUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit hover:bg-red-50 transition-colors"
+      >
         <Icon name="heroicons:currency-dollar" class="w-6 h-6 shrink-0" />
         <span>{{ $t('products.inboxForPrice') }}</span>
       </a>
@@ -58,7 +71,7 @@
         </template>
       </p>
     </div>
-  </NuxtLink>
+  </article>
 </template>
 
 <script setup lang="ts">
@@ -83,7 +96,9 @@ const inboxForPriceUrl = computed(() => {
 
 const hasDiscount = computed(() =>
   !isContactForPrice.value &&
-  props.product.discounted_price != null && props.product.discounted_price < props.product.price && props.product.discounted_price > 0
+  props.product.discounted_price != null &&
+  props.product.discounted_price < props.product.price &&
+  props.product.discounted_price > 0
 )
 
 const discountPercent = computed(() => {

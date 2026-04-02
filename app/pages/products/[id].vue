@@ -1,13 +1,14 @@
 <template>
   <div class="container-app py-8">
     <!-- Back Navigation -->
-    <NuxtLink
-      :to="localePath('/') + '#products'"
+    <button
+      type="button"
       class="inline-flex items-center gap-2 text-slate-500 hover:text-red-600 mb-8 transition-colors"
+      @click="handleBackNavigation"
     >
       <Icon name="heroicons:arrow-left" class="w-5 h-5" />
       <span>{{ $t('common.backTo') }} {{ $t('common.products') }}</span>
-    </NuxtLink>
+    </button>
 
     <!-- Loading State -->
     <div v-if="status === 'pending'" class="grid lg:grid-cols-2 gap-8">
@@ -105,6 +106,7 @@ import { formatPrice, getStockStatusConfig } from '~/composables/useDirectus'
 
 const localePath = useLocalePath()
 const route = useRoute()
+const router = useRouter()
 const productId = Number(route.params.id)
 
 const {
@@ -117,6 +119,21 @@ const {
 } = useProduct(productId)
 
 const { getOgImageUrl } = useDirectusAsset()
+
+const fallbackBackPath = computed(() => `${localePath('/')}#products`)
+
+const handleBackNavigation = async () => {
+  if (import.meta.client) {
+    const previousRoute = window.history.state?.back
+
+    if (typeof previousRoute === 'string' && previousRoute.startsWith('/')) {
+      router.back()
+      return
+    }
+  }
+
+  await navigateTo(fallbackBackPath.value)
+}
 
 // Track product view
 onMounted(() => {

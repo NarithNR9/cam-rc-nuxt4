@@ -1,62 +1,63 @@
 <template>
-  <article class="product-card block">
-    <NuxtLink :to="localePath(`/products/${product.id}`)" class="block">
-      <!-- Image -->
-      <div class="product-card-image">
-        <!-- Show actual image if URL exists -->
-        <img
-          v-if="imageUrl"
-          :src="imageUrl"
-          :alt="product.name"
-          class="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <!-- Fallback placeholder -->
-        <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-          <div class="text-center">
-            <Icon :name="categoryIcon" class="w-16 h-16 text-slate-400 mb-2" />
-            <span class="text-xs text-slate-500">{{ categoryName }}</span>
-          </div>
-        </div>
+  <article class="product-card group relative block">
+    <NuxtLink
+      :to="productDetailPath"
+      class="absolute inset-0 z-10"
+      :aria-label="`View details for ${product.name}`"
+    />
 
-        <!-- Badges -->
-        <div class="hidden md:flex md:absolute top-3 left-3 flex-col gap-2">
-          <span :class="['badge', stockConfig.bgColor]">
-            {{ stockConfig.label }}
-          </span>
-          <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
-            -{{ discountPercent }}%
-          </span>
-        </div>
-        <div class="absolute md:hidden top-3 left-3">
-          <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
-            -{{ discountPercent }}%
-          </span>
-        </div>
-        <div class="hidden md:flex md:absolute top-3 right-3">
-          <span class="badge badge-category">
-            {{ categoryName }}
-          </span>
+    <!-- Image -->
+    <div class="product-card-image">
+      <!-- Show actual image if URL exists -->
+      <img
+        v-if="imageUrl"
+        :src="imageUrl"
+        :alt="product.name"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <!-- Fallback placeholder -->
+      <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+        <div class="text-center">
+          <Icon :name="categoryIcon" class="w-16 h-16 text-slate-400 mb-2" />
+          <span class="text-xs text-slate-500">{{ categoryName }}</span>
         </div>
       </div>
-    </NuxtLink>
+
+      <!-- Badges -->
+      <div class="hidden md:flex md:absolute top-3 left-3 flex-col gap-2">
+        <span :class="['badge', stockConfig.bgColor]">
+          {{ stockConfig.label }}
+        </span>
+        <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
+          -{{ discountPercent }}%
+        </span>
+      </div>
+      <div class="absolute md:hidden top-3 left-3">
+        <span v-if="discountPercent" class="badge bg-red-600 text-white text-xs font-bold">
+          -{{ discountPercent }}%
+        </span>
+      </div>
+      <div class="hidden md:flex md:absolute top-3 right-3">
+        <span class="badge badge-category">
+          {{ categoryName }}
+        </span>
+      </div>
+    </div>
 
     <!-- Info -->
     <div class="p-4">
       <h3 class="font-semibold text-slate-800 line-clamp-2 mb-2 min-h-[3rem]">
-        <NuxtLink
-          :to="localePath(`/products/${product.id}`)"
-          class="hover:text-red-600 transition-colors"
-        >
+        <span class="transition-colors group-hover:text-red-600">
           {{ product.name }}
-        </NuxtLink>
+        </span>
       </h3>
       <a
         v-if="isContactForPrice"
         :href="inboxForPriceUrl"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit hover:bg-red-50 transition-colors"
+        class="relative z-20 flex items-center gap-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg px-2 py-1 w-fit hover:bg-red-50 transition-colors"
       >
         <Icon name="heroicons:currency-dollar" class="w-6 h-6 shrink-0" />
         <span>{{ $t('products.inboxForPrice') }}</span>
@@ -85,6 +86,8 @@ const { t } = useI18n()
 const props = defineProps<{
   product: Product
 }>()
+
+const productDetailPath = computed(() => localePath(`/products/${props.product.id}`))
 
 const isContactForPrice = computed(() => !props.product.price || props.product.price === 0)
 

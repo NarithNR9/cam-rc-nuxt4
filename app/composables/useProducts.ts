@@ -7,12 +7,14 @@ import { getFileId } from '~/composables/useDirectus'
 export function useProducts() {
   const { directus, readItems } = useDirectusClient()
 
-  // Reactive filters
-  const filters = reactive<ProductFilters>({
+  const createDefaultFilters = (): ProductFilters => ({
     search: '',
     category: 'all',
     sortBy: 'newest'
   })
+
+  // Keep filters when navigating away from and back to the homepage.
+  const filters = useState<ProductFilters>('product-filters', createDefaultFilters)
 
   const {
     data: products,
@@ -44,8 +46,8 @@ export function useProducts() {
     let result = [...products.value]
 
     // Search filter
-    if (filters.search.trim()) {
-      const searchLower = filters.search.toLowerCase()
+    if (filters.value.search.trim()) {
+      const searchLower = filters.value.search.toLowerCase()
       result = result.filter(
         (p) =>
           p.name.toLowerCase().includes(searchLower) ||
@@ -54,16 +56,16 @@ export function useProducts() {
     }
 
     // Category filter
-    if (filters.category !== 'all') {
+    if (filters.value.category !== 'all') {
       result = result.filter((p) => {
         const cat = p.category
-        if (typeof cat === 'object' && cat && 'name' in cat) return cat.name === filters.category
-        return cat === filters.category
+        if (typeof cat === 'object' && cat && 'name' in cat) return cat.name === filters.value.category
+        return cat === filters.value.category
       })
     }
 
     // Sort
-    switch (filters.sortBy) {
+    switch (filters.value.sortBy) {
       case 'price_asc':
         result.sort((a, b) => a.price - b.price)
         break
@@ -109,17 +111,15 @@ export function useProducts() {
 
   // Clear all filters
   const clearFilters = () => {
-    filters.search = ''
-    filters.category = 'all'
-    filters.sortBy = 'newest'
+    filters.value = createDefaultFilters()
   }
 
   // Check if any filters are active
   const hasActiveFilters = computed(() => {
     return (
-      filters.search.trim() !== '' ||
-      filters.category !== 'all' ||
-      filters.sortBy !== 'newest'
+      filters.value.search.trim() !== '' ||
+      filters.value.category !== 'all' ||
+      filters.value.sortBy !== 'newest'
     )
   })
 
